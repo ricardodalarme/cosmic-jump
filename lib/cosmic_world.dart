@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:cosmic_jump/cosmic_jump.dart';
+import 'package:cosmic_jump/data/items.dart';
 import 'package:cosmic_jump/features/checkpoint/checkpoint_component.dart';
 import 'package:cosmic_jump/features/equipment/hud/equipment_hud.dart';
 import 'package:cosmic_jump/features/fog/fog_component.dart';
@@ -64,43 +65,54 @@ class CosmicWorld extends World with HasGameRef<CosmicJump> {
   void _spawningObjects() {
     final spawnPointsLayer = level.tileMap.getLayer<ObjectGroup>('Spawnpoints');
 
-    if (spawnPointsLayer != null) {
-      for (final spawnPoint in spawnPointsLayer.objects) {
-        switch (spawnPoint.class_) {
-          case 'Player':
-            game.player = PlayerComponent()
-              ..position = Vector2(spawnPoint.x, spawnPoint.y)
-              ..scale.x = 1;
+    if (spawnPointsLayer == null) return;
 
-            add(game.player);
-          case 'Fruit':
-            final fruit = MapItemComponent(
-              item: spawnPoint.name,
-              position: Vector2(spawnPoint.x, spawnPoint.y),
-              size: Vector2(spawnPoint.width, spawnPoint.height),
-            );
-            add(fruit);
-          case 'Saw':
-            final isVertical =
-                spawnPoint.properties.getValue<bool>('isVertical')!;
-            final offNeg = spawnPoint.properties.getValue<double>('offNeg')!;
-            final offPos = spawnPoint.properties.getValue<double>('offPos')!;
-            final saw = SawComponent(
-              isVertical: isVertical,
-              offNeg: offNeg,
-              offPos: offPos,
-              position: Vector2(spawnPoint.x, spawnPoint.y),
-              size: Vector2(spawnPoint.width, spawnPoint.height),
-            );
-            add(saw);
-          case 'Checkpoint':
-            final checkpoint = CheckpointComponent(
-              position: Vector2(spawnPoint.x, spawnPoint.y),
-              size: Vector2(spawnPoint.width, spawnPoint.height),
-            );
-            add(checkpoint);
-          default:
-        }
+    for (final spawnPoint in spawnPointsLayer.objects) {
+      final position = Vector2(spawnPoint.x, spawnPoint.y);
+      final size = Vector2(spawnPoint.width, spawnPoint.height);
+
+      switch (spawnPoint.type) {
+        case 'Player':
+          game.player = PlayerComponent()
+            ..position = position
+            ..scale.x = 1;
+
+          add(game.player);
+        case 'Fruit':
+          final itemIndex = items.indexWhere(
+            (item) => item.name == spawnPoint.name,
+          );
+          if (itemIndex == -1) {
+            break;
+          }
+          final item = items[itemIndex];
+          final mapItem = MapItemComponent(
+            item: item,
+            position: position,
+            size: size,
+          );
+          add(mapItem);
+        case 'Saw':
+          final isVertical =
+              spawnPoint.properties.getValue<bool>('isVertical')!;
+          final offNeg = spawnPoint.properties.getValue<double>('offNeg')!;
+          final offPos = spawnPoint.properties.getValue<double>('offPos')!;
+          final saw = SawComponent(
+            isVertical: isVertical,
+            offNeg: offNeg,
+            offPos: offPos,
+            position: position,
+            size: size,
+          );
+          add(saw);
+        case 'Checkpoint':
+          final checkpoint = CheckpointComponent(
+            position: position,
+            size: size,
+          );
+          add(checkpoint);
+        default:
+          continue;
       }
     }
   }
@@ -108,25 +120,25 @@ class CosmicWorld extends World with HasGameRef<CosmicJump> {
   void _addCollisions() {
     final collisionsLayer = level.tileMap.getLayer<ObjectGroup>('Collisions');
 
-    if (collisionsLayer != null) {
-      for (final collision in collisionsLayer.objects) {
-        switch (collision.class_) {
-          case 'Platform':
-            final platform = CollisionBlock(
-              position: Vector2(collision.x, collision.y),
-              size: Vector2(collision.width, collision.height),
-              isPlatform: true,
-            );
-            collisionBlocks.add(platform);
-            add(platform);
-          default:
-            final block = CollisionBlock(
-              position: Vector2(collision.x, collision.y),
-              size: Vector2(collision.width, collision.height),
-            );
-            collisionBlocks.add(block);
-            add(block);
-        }
+    if (collisionsLayer == null) return;
+
+    for (final collision in collisionsLayer.objects) {
+      switch (collision.type) {
+        case 'Platform':
+          final platform = CollisionBlock(
+            position: Vector2(collision.x, collision.y),
+            size: Vector2(collision.width, collision.height),
+            isPlatform: true,
+          );
+          collisionBlocks.add(platform);
+          add(platform);
+        default:
+          final block = CollisionBlock(
+            position: Vector2(collision.x, collision.y),
+            size: Vector2(collision.width, collision.height),
+          );
+          collisionBlocks.add(block);
+          add(block);
       }
     }
     game.player.collisionBlocks = collisionBlocks;
