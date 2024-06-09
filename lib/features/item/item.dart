@@ -17,3 +17,10 @@ final class EquipmentItem extends Item {
     this.poisonResistance = 0,
   });
 }
+
+final class JetpackItem extends EquipmentItem {
+  const JetpackItem({
+    required super.name,
+    required super.imagePath,
+  });
+}
