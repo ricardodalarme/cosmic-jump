@@ -1,7 +1,7 @@
-import 'package:cosmic_jump/features/item/item.dart';
+import 'package:cosmic_jump/features/item/item_model.dart';
 
 final class InventoryItemModel {
-  final Item item;
+  final ItemModel item;
   int quantity;
 
   InventoryItemModel({

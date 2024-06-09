@@ -4,7 +4,7 @@ import 'dart:math';
 import 'package:cosmic_jump/cosmic_jump.dart';
 import 'package:cosmic_jump/cosmic_world.dart';
 import 'package:cosmic_jump/features/checkpoint/checkpoint_component.dart';
-import 'package:cosmic_jump/features/item/item.dart';
+import 'package:cosmic_jump/features/item/item_model.dart';
 import 'package:cosmic_jump/features/jetpack/jetpack_component.dart';
 import 'package:cosmic_jump/features/jetpack/jetpack_status.dart';
 import 'package:cosmic_jump/features/map/map_item_component.dart';
@@ -356,8 +356,9 @@ class PlayerComponent extends SpriteAnimationGroupComponent<PlayerState>
     _respawn();
   }
 
-  bool get hasJetpack =>
-      game.account.equipments.equippedItems.whereType<JetpackItem>().isNotEmpty;
+  bool get hasJetpack => game.account.equipments.equippedItems
+      .whereType<JetpackItemModel>()
+      .isNotEmpty;
 
   double get poisonResistance =>
       game.account.equipments.equippedItems.fold(0, (prev, item) {

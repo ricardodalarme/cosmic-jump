@@ -1,7 +1,7 @@
 import 'package:cosmic_jump/cosmic_jump.dart';
 import 'package:cosmic_jump/features/inventory/inventory_item_model.dart';
 import 'package:cosmic_jump/features/inventory/inventory_manager.dart';
-import 'package:cosmic_jump/features/item/item.dart';
+import 'package:cosmic_jump/features/item/item_model.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/image_composition.dart';
@@ -95,7 +95,7 @@ class InventoryEquipmentHUD extends PositionComponent
 }
 
 class ItemDetailsHUD extends PositionComponent with HasGameRef<CosmicJump> {
-  Item? item;
+  ItemModel? item;
 
   ItemDetailsHUD({
     required super.position,
@@ -260,7 +260,7 @@ class InventoryComponent extends PositionComponent
 
       final currentItem = inventory.items[draggedItemIndex!]?.item;
 
-      if (currentItem is EquipmentItem) {
+      if (currentItem is EquipmentItemModel) {
         // check if we are dropping on the equipment HUD and equip the item
         final equipmentHudRect = _inventoryEquipmentHUD.toRect();
         if (equipmentHudRect.contains(localPosition.toOffset())) {

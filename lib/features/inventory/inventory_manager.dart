@@ -1,5 +1,5 @@
 import 'package:cosmic_jump/features/inventory/inventory_item_model.dart';
-import 'package:cosmic_jump/features/item/item.dart';
+import 'package:cosmic_jump/features/item/item_model.dart';
 
 class InventoryManager {
   final List<InventoryItemModel?> _items = List.filled(_maxItems, null);
@@ -8,7 +8,7 @@ class InventoryManager {
 
   static const _maxItems = 30;
 
-  void addItem(Item item, [int quantity = 1]) {
+  void addItem(ItemModel item, [int quantity = 1]) {
     final existingItem = _items.firstWhere(
       (element) => element?.item == item,
       orElse: () => null,
