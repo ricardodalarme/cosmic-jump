@@ -1,0 +1,50 @@
+name: cosmic_jump
+publish_to: "none"
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.4.0 <4.0.0"
+
+dependencies:
+  flame: ^1.18.0
+  flame_audio: ^2.10.2
+  flame_tiled: ^1.20.2
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  icons_launcher: ^2.1.7
+
+icons_launcher:
+  image_path: assets/images/launcher_icon.png
+  platforms:
+    android:
+      enable: true
+    ios:
+      enable: true
+    macos:
+      enable: true
+    web:
+      enable: true
+
+flutter:
+  assets:
+    - assets/audio/
+    - assets/tiles/
+    - assets/images/Asteroids/
+    - assets/images/Background/
+    - assets/images/Terrain/
+    - assets/images/HUD/
+    - assets/images/Fogs/
+    - assets/images/Traps/Saw/
+    - assets/images/Items/Checkpoints/Checkpoint/
+    - assets/images/Items/
+    - assets/images/Items/Fruits/
+    - assets/images/Main Characters/
+    - assets/images/Main Characters/Mask Dude/
+    - assets/images/Main Characters/Ninja Frog/
+    - assets/images/Main Characters/Pink Man/
+    - assets/images/Main Characters/Virtual Guy/
+    - assets/images/Enemies/Chicken/
