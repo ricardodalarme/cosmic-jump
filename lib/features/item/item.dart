@@ -1,10 +1,12 @@
 class Item {
   final String name;
   final String imagePath;
+  final String description;
 
   const Item({
     required this.name,
     required this.imagePath,
+    required this.description,
   });
 }
 
@@ -14,6 +16,7 @@ final class EquipmentItem extends Item {
   const EquipmentItem({
     required super.name,
     required super.imagePath,
+    required super.description,
     this.poisonResistance = 0,
   });
 }
@@ -22,5 +25,6 @@ final class JetpackItem extends EquipmentItem {
   const JetpackItem({
     required super.name,
     required super.imagePath,
+    required super.description,
   });
 }

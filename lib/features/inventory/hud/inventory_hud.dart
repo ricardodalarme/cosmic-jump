@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:cosmic_jump/cosmic_jump.dart';
 import 'package:cosmic_jump/features/inventory/inventory_item_model.dart';
 import 'package:cosmic_jump/features/inventory/inventory_manager.dart';
@@ -7,6 +5,7 @@ import 'package:cosmic_jump/features/item/item.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/image_composition.dart';
+import 'package:flutter/painting.dart';
 
 class DraggableInventoryItem extends Component with HasGameRef<CosmicJump> {
   InventoryItemModel? item;
@@ -95,14 +94,52 @@ class InventoryEquipmentHUD extends PositionComponent
   }
 }
 
+class ItemDetailsHUD extends PositionComponent with HasGameRef<CosmicJump> {
+  Item? item;
+
+  ItemDetailsHUD({
+    required super.position,
+  }) : super(priority: 20);
+
+  @override
+  Future<void> onLoad() async {
+    super.onLoad();
+    size = Vector2(200, 100);
+  }
+
+  @override
+  void render(Canvas canvas) {
+    super.render(canvas);
+
+    if (item == null) {
+      return;
+    }
+
+    final paint = Paint()..color = const Color(0xFF000000).withOpacity(0.7);
+
+    final textPainter = TextPainter(
+      text: TextSpan(
+        text: item!.description,
+        style: const TextStyle(color: Color(0xFFFFFFFF), fontSize: 14),
+      ),
+      textDirection: TextDirection.ltr,
+    );
+    textPainter.layout(maxWidth: size.x - 10);
+
+    canvas.drawRect(Rect.fromLTWH(0, 0, size.x, size.y), paint);
+    textPainter.paint(canvas, const Offset(5, 5));
+  }
+}
+
 class InventoryComponent extends PositionComponent
-    with HasGameRef<CosmicJump>, HasVisibility, DragCallbacks {
+    with HasGameRef<CosmicJump>, HasVisibility, DragCallbacks, TapCallbacks {
   final InventoryManager inventory;
   int? draggedItemIndex;
   Vector2? lastDragPosition;
 
   late DraggableInventoryItem _draggableInventoryItem;
   late InventoryEquipmentHUD _inventoryEquipmentHUD;
+  late ItemDetailsHUD _descriptionHUD;
 
   InventoryComponent(this.inventory);
 
@@ -114,11 +151,13 @@ class InventoryComponent extends PositionComponent
 
     _draggableInventoryItem = DraggableInventoryItem();
     _inventoryEquipmentHUD = InventoryEquipmentHUD(position: Vector2(330, 0));
+    _descriptionHUD = ItemDetailsHUD(position: Vector2(0, 450));
 
     await addAll(
       [
         _draggableInventoryItem,
         _inventoryEquipmentHUD,
+        _descriptionHUD,
       ],
     );
   }
@@ -272,5 +311,34 @@ class InventoryComponent extends PositionComponent
     lastDragPosition = null;
     _draggableInventoryItem.item = null;
     super.onDragCancel(event);
+  }
+
+  @override
+  void onTapDown(TapDownEvent event) {
+    final items = inventory.items;
+    final itemSize = Vector2(50, 50);
+    const margin = 10;
+    const rows = 5;
+    const cols = 5;
+
+    final localPosition = event.localPosition;
+    for (var i = 0; i < items.length; i++) {
+      final row = i ~/ rows;
+      final col = i % cols;
+      final itemPosition = Vector2(
+        col * (itemSize.x + margin) + margin,
+        row * (itemSize.y + margin) + margin,
+      );
+
+      final itemRect = itemPosition & itemSize;
+      if (itemRect.contains(localPosition.toOffset())) {
+        final item = items[i];
+        if (item != null) {
+          _descriptionHUD.item = item.item;
+        }
+        break;
+      }
+    }
+    super.onTapDown(event);
   }
 }
