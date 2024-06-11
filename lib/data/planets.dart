@@ -27,5 +27,6 @@ const List<PlanetModel> planets = [
     description:
         'The fourth planet from the Sun and the second-smallest planet in the Solar System, being larger than only Mercury.',
     gravity: 3.71,
+    visibility: 0.2,
   ),
 ];

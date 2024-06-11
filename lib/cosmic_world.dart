@@ -7,6 +7,7 @@ import 'package:cosmic_jump/features/equipment/hud/equipment_hud.dart';
 import 'package:cosmic_jump/features/fog/fog_component.dart';
 import 'package:cosmic_jump/features/health/hud/health_hud.dart';
 import 'package:cosmic_jump/features/jetpack/hud/jetpack_energy_hud.dart';
+import 'package:cosmic_jump/features/light/light_component.dart';
 import 'package:cosmic_jump/features/map/map_item_component.dart';
 import 'package:cosmic_jump/features/meteor/meteor_manager.dart';
 import 'package:cosmic_jump/features/planet/planet_model.dart';
@@ -27,6 +28,7 @@ class CosmicWorld extends World with HasGameRef<CosmicJump> {
 
   late final TiledComponent level;
   List<CollisionBlock> collisionBlocks = [];
+  late final LightAndDarknessComponent lightAndDarkness;
 
   @override
   FutureOr<void> onLoad() async {
@@ -44,6 +46,25 @@ class CosmicWorld extends World with HasGameRef<CosmicJump> {
     if (planet.hasMeteorShower) {
       add(MeteorManager(this));
     }
+
+    double radius = 40;
+
+    if (game.player.hasNightVision) {
+      radius = 100;
+    }
+
+    final lightSources = [
+      LightSource(position: Vector2(0, 0), radius: radius),
+    ];
+
+    final lightAndDarknessComponent = LightAndDarknessComponent(
+      size: game.size,
+      lightSources: lightSources,
+      player: game.player,
+      visibility: planet.visibility,
+    );
+
+    add(lightAndDarknessComponent);
 
     _addHud();
     return super.onLoad();

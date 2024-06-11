@@ -17,4 +17,9 @@ const List<ItemModel> items = [
     poisonResistance: 1,
     description: 'Resist poison',
   ),
+  VisibilityItemModel(
+    name: 'Glasses',
+    imagePath: 'Items/Glasses.png',
+    description: 'Increase visibility during the night',
+  ),
 ];

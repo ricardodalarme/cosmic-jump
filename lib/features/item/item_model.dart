@@ -32,3 +32,12 @@ final class JetpackItemModel extends EquipmentItemModel {
     super.animationFrames,
   });
 }
+
+final class VisibilityItemModel extends EquipmentItemModel {
+  const VisibilityItemModel({
+    required super.name,
+    required super.imagePath,
+    required super.description,
+    super.animationFrames,
+  });
+}

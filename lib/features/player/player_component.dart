@@ -360,6 +360,10 @@ class PlayerComponent extends SpriteAnimationGroupComponent<PlayerState>
       .whereType<JetpackItemModel>()
       .isNotEmpty;
 
+  bool get hasNightVision => game.account.equipments.equippedItems
+      .whereType<VisibilityItemModel>()
+      .isNotEmpty;
+
   double get poisonResistance =>
       game.account.equipments.equippedItems.fold(0, (prev, item) {
         return prev + (item?.poisonResistance ?? 0);

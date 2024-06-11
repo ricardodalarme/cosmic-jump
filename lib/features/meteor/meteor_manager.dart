@@ -28,6 +28,6 @@ class MeteorManager extends Component with HasGameRef<CosmicJump> {
     final meteor = MeteorComponent(worldd)
       ..position =
           Vector2(_random.nextDouble() * gameRef.cam.viewport.size.x, 0);
-    worldd.add(meteor);
+    add(meteor);
   }
 }

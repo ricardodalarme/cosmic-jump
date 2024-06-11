@@ -30,7 +30,7 @@ class CosmicJump extends FlameGame
   PlayerComponent player = PlayerComponent();
   late JoystickComponent joystick;
   bool showControls = false;
-  bool playSounds = true;
+  bool playSounds = false;
   double soundVolume = 1;
   int currentLevelIndex = -1;
 
@@ -67,6 +67,7 @@ class CosmicJump extends FlameGame
     account.inventory.addItem(items[0]);
     account.inventory.addItem(items[1]);
     account.inventory.addItem(items[2]);
+    account.inventory.addItem(items[3]);
 
     return super.onLoad();
   }
