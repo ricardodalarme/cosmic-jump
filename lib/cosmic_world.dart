@@ -3,10 +3,7 @@ import 'dart:async';
 import 'package:cosmic_jump/cosmic_jump.dart';
 import 'package:cosmic_jump/data/items.dart';
 import 'package:cosmic_jump/features/checkpoint/checkpoint_component.dart';
-import 'package:cosmic_jump/features/equipment/hud/equipment_hud.dart';
 import 'package:cosmic_jump/features/fog/fog_component.dart';
-import 'package:cosmic_jump/features/health/hud/health_hud.dart';
-import 'package:cosmic_jump/features/jetpack/hud/jetpack_energy_hud.dart';
 import 'package:cosmic_jump/features/light/light_component.dart';
 import 'package:cosmic_jump/features/map/map_item_component.dart';
 import 'package:cosmic_jump/features/meteor/meteor_manager.dart';
@@ -14,6 +11,7 @@ import 'package:cosmic_jump/features/planet/planet_model.dart';
 import 'package:cosmic_jump/features/player/player_component.dart';
 import 'package:cosmic_jump/features/trap/saw_component.dart';
 import 'package:cosmic_jump/pages/game/hud/back_button.dart';
+import 'package:cosmic_jump/pages/game/hud/main_hud.dart';
 import 'package:cosmic_jump/pages/game/hud/pause_button.dart';
 import 'package:cosmic_jump/utils/collision_block.dart';
 import 'package:flame/components.dart';
@@ -72,14 +70,9 @@ class CosmicWorld extends World with HasGameRef<CosmicJump> {
 
   void _addHud() {
     addAll([
-      if (game.player.jetpack != null) JetpackEnergyHud(game.player.jetpack!),
+      MainHud(),
       BackButton(),
       PauseButton(),
-      EquipmentHud(
-        playerEquipment: game.account.equipments,
-        position: Vector2(300, 10),
-      ),
-      HealthHud(position: Vector2(30, 55)),
     ]);
   }
 

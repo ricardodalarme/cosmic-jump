@@ -1,4 +1,0 @@
-enum HeartState {
-  available,
-  unavailable,
-}

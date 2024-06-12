@@ -15,7 +15,7 @@ class ItemComponent extends SpriteAnimationComponent
   });
 
   static const double _stepTime = 0.05;
-  static final Vector2 _textureSize = Vector2.all(32);
+  static final Vector2 textureSize = Vector2.all(32);
 
   @override
   FutureOr<void> onLoad() {
@@ -24,7 +24,7 @@ class ItemComponent extends SpriteAnimationComponent
       SpriteAnimationData.sequenced(
         amount: item.animationFrames,
         stepTime: _stepTime,
-        textureSize: _textureSize,
+        textureSize: textureSize,
       ),
     );
     super.onLoad();

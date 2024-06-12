@@ -46,8 +46,11 @@ class PlayerComponent extends SpriteAnimationGroupComponent<PlayerState>
   bool gotHit = false;
   bool reachedCheckpoint = false;
 
-  static const double _maxHealth = 5;
-  double health = _maxHealth;
+  static const double maxHealth = 10;
+  double health = maxHealth;
+
+  static const double maxEnergy = 10;
+  double energy = maxEnergy;
 
   List<CollisionBlock> collisionBlocks = [];
   static const CustomHitbox hitbox = CustomHitbox(
@@ -317,7 +320,7 @@ class PlayerComponent extends SpriteAnimationGroupComponent<PlayerState>
 
     scale.x = 1;
     position = startingPosition - Vector2.all(32);
-    health = _maxHealth;
+    health = maxHealth;
     current = PlayerState.appearing;
 
     await animationTicker?.completed;
