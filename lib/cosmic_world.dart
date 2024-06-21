@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:cosmic_jump/cosmic_jump.dart';
 import 'package:cosmic_jump/data/items.dart';
 import 'package:cosmic_jump/features/checkpoint/checkpoint_component.dart';
+import 'package:cosmic_jump/features/dialog/dialogue_controller_component.dart';
 import 'package:cosmic_jump/features/fog/fog_component.dart';
 import 'package:cosmic_jump/features/light/light_component.dart';
 import 'package:cosmic_jump/features/map/map_item_component.dart';
@@ -16,6 +17,8 @@ import 'package:cosmic_jump/pages/game/hud/pause_button.dart';
 import 'package:cosmic_jump/utils/collision_block.dart';
 import 'package:flame/components.dart';
 import 'package:flame_tiled/flame_tiled.dart';
+import 'package:flutter/services.dart';
+import 'package:jenny/jenny.dart';
 
 class CosmicWorld extends World with HasGameRef<CosmicJump> {
   CosmicWorld({
@@ -25,8 +28,7 @@ class CosmicWorld extends World with HasGameRef<CosmicJump> {
   final PlanetModel planet;
 
   late final TiledComponent level;
-  List<CollisionBlock> collisionBlocks = [];
-  late final LightAndDarknessComponent lightAndDarkness;
+  final List<CollisionBlock> collisionBlocks = [];
 
   @override
   FutureOr<void> onLoad() async {
@@ -65,14 +67,41 @@ class CosmicWorld extends World with HasGameRef<CosmicJump> {
     add(lightAndDarknessComponent);
 
     _addHud();
-    return super.onLoad();
+    await _startDialogue();
+
+    super.onLoad();
+  }
+
+  Future<void> _startDialogue() async {
+    final image = game.images.fromCache('Planets/${planet.name}.png');
+    final background = SpriteComponent.fromImage(
+      game.images.fromCache('Planets/${planet.name}.png'),
+      // center of screen
+      position: Vector2(
+        game.size.x / 2 - image.width / 2,
+        game.size.y / 2 - image.height / 2,
+      ),
+    );
+    game.camera.viewport.add(background);
+    final dialogueControllerComponent = DialogueControllerComponent();
+    add(dialogueControllerComponent);
+
+    final yarnProject = YarnProject();
+    yarnProject
+        .parse(await rootBundle.loadString('assets/yarn/${planet.name}.yarn'));
+    final dialogueRunner = DialogueRunner(
+      yarnProject: yarnProject,
+      dialogueViews: [dialogueControllerComponent],
+    );
+    await dialogueRunner.startDialogue('Description');
+    game.camera.viewport.remove(background);
   }
 
   void _addHud() {
     addAll([
       MainHud(),
       BackButton(),
-      PauseButton(),
+      //PauseButton(),
     ]);
   }
 

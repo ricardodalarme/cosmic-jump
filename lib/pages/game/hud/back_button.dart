@@ -12,8 +12,13 @@ class BackButton extends SimpleButton with HasGameReference<CosmicJump> {
             ..lineTo(22, 32)
             ..moveTo(12, 20)
             ..lineTo(34, 20),
-          position: Vector2.all(10),
         );
+
+  @override
+  Future<void> onLoad() async {
+    position = Vector2(300, 8);
+    await super.onLoad();
+  }
 
   @override
   void action() => game.router.pop();

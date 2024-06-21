@@ -23,7 +23,7 @@ class CosmicJump extends FlameGame
         HasCollisionDetection,
         TapCallbacks {
   @override
-  Color backgroundColor() => const Color(0xFF211F30);
+  Color backgroundColor() => const Color(0xFF0d0814);
   late CameraComponent cam;
 
   final AccountModel account = AccountModel();

@@ -30,7 +30,7 @@ class RoundedButton extends PositionComponent with TapCallbacks {
   }
 
   final String text;
-  final void Function() action;
+  final VoidCallback action;
   final TextPainter _textDrawable;
   late final Offset _textOffset;
   late final RRect _rrect;
