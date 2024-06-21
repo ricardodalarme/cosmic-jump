@@ -233,12 +233,7 @@ class PlayerComponent extends SpriteAnimationGroupComponent<PlayerState>
     position.x += velocity.x * dt;
   }
 
-  double get _jumpForce =>
-      game.account.equipments.equippedItems.where((element) {
-        return element?.name == 'Gravity Boots';
-      }).isNotEmpty
-          ? _defaultJumpForce * 1.5
-          : _defaultJumpForce;
+  double get _jumpForce => _defaultJumpForce;
 
   void _playerJump(double dt) {
     if (game.playSounds) FlameAudio.play('jump.wav', volume: game.soundVolume);

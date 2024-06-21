@@ -67,7 +67,6 @@ class CosmicJump extends FlameGame
     account.inventory.addItem(items[0]);
     account.inventory.addItem(items[1]);
     account.inventory.addItem(items[2]);
-    account.inventory.addItem(items[3]);
 
     return super.onLoad();
   }
