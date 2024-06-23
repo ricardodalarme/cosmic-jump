@@ -35,19 +35,19 @@ flutter:
     - assets/audio/
     - assets/tiles/
     - assets/images/Asteroids/
-    - assets/images/Background/
-    - assets/images/Terrain/
+    - assets/images/Characters/
+    - assets/images/Characters/Mask Dude/
+    - assets/images/Characters/Ninja Frog/
+    - assets/images/Characters/Pink Man/
+    - assets/images/Characters/Virtual Guy/
+    - assets/images/Fogs/
     - assets/images/HUD/
     - assets/images/Fogs/
     - assets/images/Traps/Saw/
-    - assets/images/Items/Checkpoints/Checkpoint/
     - assets/images/Items/
-    - assets/images/Items/Fruits/
-    - assets/images/Main Characters/
-    - assets/images/Main Characters/Mask Dude/
-    - assets/images/Main Characters/Ninja Frog/
-    - assets/images/Main Characters/Pink Man/
-    - assets/images/Main Characters/Virtual Guy/
-    - assets/images/Enemies/Chicken/
+    - assets/images/Items/Checkpoints/Checkpoint/
     - assets/images/Planets/
+    - assets/images/Terrain/
+    - assets/images/Traps/Saw/
+    - assets/tiles/
     - assets/yarn/

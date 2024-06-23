@@ -87,7 +87,7 @@ class MeteorComponent extends SpriteAnimationComponent
 
   Future<void> _explode() async {
     animation = SpriteAnimation.fromFrameData(
-      game.images.fromCache('Items/Fruits/Collected.png'),
+      game.images.fromCache('Items/Collected.png'),
       SpriteAnimationData.sequenced(
         amount: 6,
         stepTime: stepTime,

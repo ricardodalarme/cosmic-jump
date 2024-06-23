@@ -16,7 +16,7 @@ class CharacterPreviewHud extends SpriteComponent
   Future<void> onLoad() async {
     final character = game.player.character;
     sprite = Sprite(
-      game.images.fromCache('Main Characters/$character/Idle (32x32).png'),
+      game.images.fromCache('Characters/$character/Idle (32x32).png'),
       srcSize: _spriteSize,
     );
 

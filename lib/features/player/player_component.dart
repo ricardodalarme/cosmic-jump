@@ -172,7 +172,7 @@ class PlayerComponent extends SpriteAnimationGroupComponent<PlayerState>
 
   SpriteAnimation _spriteAnimation(String state, int amount) {
     return SpriteAnimation.fromFrameData(
-      game.images.fromCache('Main Characters/$character/$state (32x32).png'),
+      game.images.fromCache('Characters/$character/$state (32x32).png'),
       SpriteAnimationData.sequenced(
         amount: amount,
         stepTime: _stepTime,
@@ -183,7 +183,7 @@ class PlayerComponent extends SpriteAnimationGroupComponent<PlayerState>
 
   SpriteAnimation _specialSpriteAnimation(String state, int amount) {
     return SpriteAnimation.fromFrameData(
-      game.images.fromCache('Main Characters/$state (96x96).png'),
+      game.images.fromCache('Characters/$state (96x96).png'),
       SpriteAnimationData.sequenced(
         amount: amount,
         stepTime: _stepTime,

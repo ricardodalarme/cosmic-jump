@@ -52,10 +52,10 @@ class MapItemComponent extends PositionComponent
     if (!_collected) {
       _collected = true;
       if (game.playSounds) {
-        await FlameAudio.play('collect_fruit.wav', volume: game.soundVolume);
+        await FlameAudio.play('collect_item.wav', volume: game.soundVolume);
       }
       _itemComponent.animation = SpriteAnimation.fromFrameData(
-        game.images.fromCache('Items/Fruits/Collected.png'),
+        game.images.fromCache('Items/Collected.png'),
         SpriteAnimationData.sequenced(
           amount: _collectAnimationFrames,
           stepTime: _collectStepTime,
