@@ -47,6 +47,7 @@ flutter:
     - assets/images/Items/
     - assets/images/Items/Checkpoints/Checkpoint/
     - assets/images/Planets/
+    - assets/images/Planets/Pictures/
     - assets/images/Terrain/
     - assets/images/Traps/Saw/
     - assets/tiles/

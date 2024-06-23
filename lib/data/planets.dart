@@ -4,16 +4,12 @@ import 'package:flutter/painting.dart';
 
 const List<PlanetModel> planets = [
   PlanetModel(
-    name: 'mercury',
-    description:
-        'The smallest planet in the Solar System and the closest to the Sun.',
+    name: 'Mercury',
     gravity: 3.7,
     hasMeteorShower: true,
   ),
   PlanetModel(
-    name: 'venus',
-    description:
-        'The second planet from the Sun. It is named after the Roman goddess of love and beauty.',
+    name: 'Venus',
     gravity: 8.87,
     fog: FogModel(
       speed: 10,
@@ -23,9 +19,7 @@ const List<PlanetModel> planets = [
     poison: 1,
   ),
   PlanetModel(
-    name: 'mars',
-    description:
-        'The fourth planet from the Sun and the second-smallest planet in the Solar System, being larger than only Mercury.',
+    name: 'Mars',
     gravity: 3.71,
     visibility: 0.2,
   ),

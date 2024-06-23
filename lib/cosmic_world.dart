@@ -13,7 +13,6 @@ import 'package:cosmic_jump/features/player/player_component.dart';
 import 'package:cosmic_jump/features/trap/saw_component.dart';
 import 'package:cosmic_jump/pages/game/hud/back_button.dart';
 import 'package:cosmic_jump/pages/game/hud/main_hud.dart';
-import 'package:cosmic_jump/pages/game/hud/pause_button.dart';
 import 'package:cosmic_jump/utils/collision_block.dart';
 import 'package:flame/components.dart';
 import 'package:flame_tiled/flame_tiled.dart';
@@ -73,10 +72,9 @@ class CosmicWorld extends World with HasGameRef<CosmicJump> {
   }
 
   Future<void> _startDialogue() async {
-    final image = game.images.fromCache('Planets/${planet.name}.png');
+    final image = game.images.fromCache('Planets/Pictures/${planet.name}.png');
     final background = SpriteComponent.fromImage(
-      game.images.fromCache('Planets/${planet.name}.png'),
-      // center of screen
+      image,
       position: Vector2(
         game.size.x / 2 - image.width / 2,
         game.size.y / 2 - image.height / 2,
