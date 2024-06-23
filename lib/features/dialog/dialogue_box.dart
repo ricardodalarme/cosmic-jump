@@ -22,13 +22,13 @@ class DialogueBoxComponent extends SpriteComponent with HasGameReference {
     return super.onLoad();
   }
 
-  void changeText(String newText, Function() goNextLine) {
+  void changeText(String newText, void Function() goNextLine) {
     textBox.text = newText;
     buttonRow.showNextButton(goNextLine);
   }
 
   void showOptions({
-    required Function(int optionNumber) onChoice,
+    required void Function(int optionNumber) onChoice,
     required DialogueOption option1,
     required DialogueOption option2,
   }) {
@@ -39,7 +39,7 @@ class DialogueBoxComponent extends SpriteComponent with HasGameReference {
     );
   }
 
-  void showCloseButton(Function() onClose) {
+  void showCloseButton(void Function() onClose) {
     buttonRow.showCloseButton(onClose);
   }
 }
