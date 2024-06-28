@@ -29,7 +29,7 @@ class MenuPage extends Component with HasGameReference<CosmicJump> {
       _button1 = RoundedButton(
         text: 'Mercúrio',
         action: () => game.router.pushRoute(GamePage.route(0)),
-        color: const Color(0xffadde6c),
+        color: const Color(0xffdebe6c),
         borderColor: const Color(0xfffff4c7),
       ),
       _button2 = RoundedButton(
