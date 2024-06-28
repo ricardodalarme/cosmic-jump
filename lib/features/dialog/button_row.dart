@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:jenny/jenny.dart';
 
 class ButtonRow extends PositionComponent {
-  ButtonRow({required super.size}) : super(position: Vector2(0, 126));
+  ButtonRow({required super.size}) : super(position: Vector2(0, 145));
 
   void removeButtons() {
     final buttonList = children.query<DialogueButton>();
@@ -21,7 +21,7 @@ class ButtonRow extends PositionComponent {
     removeButtons();
     final nextButton = DialogueButton(
       assetPath: 'HUD/green_button_sqr.png',
-      text: 'Next',
+      text: 'Próximo',
       position: Vector2(size.x / 2, 0),
       onPressed: () {
         onNextButtonPressed();
@@ -63,7 +63,7 @@ class ButtonRow extends PositionComponent {
   void showCloseButton(VoidCallback onClose) {
     final closeButton = DialogueButton(
       assetPath: 'HUD/green_button_sqr.png',
-      text: 'Close',
+      text: 'Fechar',
       onPressed: () => onClose(),
       position: Vector2(size.x / 2, 0),
     );

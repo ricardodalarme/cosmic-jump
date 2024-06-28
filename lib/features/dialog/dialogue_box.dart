@@ -10,13 +10,13 @@ class DialogueBoxComponent extends SpriteComponent with HasGameReference {
 
   @override
   Future<void> onLoad() async {
-    position = Vector2(game.size.x / 2, game.size.y - 77);
+    position = Vector2(game.size.x / 2, game.size.y - 4);
     anchor = Anchor.bottomCenter;
     sprite = await Sprite.load(
       'HUD/Dialog.png',
       srcSize: spriteSize,
     );
-    size = Vector2(game.size.x - 10, 155);
+    size = Vector2(game.size.x - 10, 175);
     buttonRow = ButtonRow(size: size);
     await addAll([buttonRow, textBox]);
     return super.onLoad();

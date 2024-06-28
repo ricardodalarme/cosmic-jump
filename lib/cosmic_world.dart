@@ -164,12 +164,20 @@ class CosmicWorld extends World with HasGameRef<CosmicJump> {
     if (collisionsLayer == null) return;
 
     for (final collision in collisionsLayer.objects) {
-      switch (collision.type) {
+      switch (collision.class_) {
         case 'Platform':
           final platform = CollisionBlock(
             position: Vector2(collision.x, collision.y),
             size: Vector2(collision.width, collision.height),
             isPlatform: true,
+          );
+          collisionBlocks.add(platform);
+          add(platform);
+        case 'Ground':
+          final platform = CollisionBlock(
+            position: Vector2(collision.x, collision.y),
+            size: Vector2(collision.width, collision.height),
+            isGround: true,
           );
           collisionBlocks.add(platform);
           add(platform);

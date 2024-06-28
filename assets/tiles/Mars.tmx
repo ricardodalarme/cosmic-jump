@@ -100,7 +100,7 @@
  <objectgroup id="3" name="Collisions">
   <object id="7" x="-16" y="0" width="16" height="640"/>
   <object id="8" x="-16" y="-16" width="384" height="16"/>
-  <object id="10" x="0" y="561.704" width="352" height="78.2959"/>
+  <object id="10" name="Ground" type="Ground" x="0" y="561.704" width="352" height="78.2959"/>
   <object id="14" x="304" y="464" width="48" height="16"/>
   <object id="20" type="Platform" x="160" y="528" width="48" height="16"/>
   <object id="60" type="Platform" x="112" y="240" width="48" height="16"/>

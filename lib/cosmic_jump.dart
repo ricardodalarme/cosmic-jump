@@ -115,12 +115,8 @@ class CosmicJump extends FlameGame
   }
 
   void loadNextLevel() {
-    if (currentLevelIndex < planets.length - 1) {
-      loadLevel(currentLevelIndex + 1);
-    } else {
-      unloadCurrentLevel();
-      router.pop();
-    }
+    unloadCurrentLevel();
+    router.pop();
   }
 
   void loadLevel(int index) {

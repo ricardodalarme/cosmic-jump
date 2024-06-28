@@ -118,7 +118,7 @@
  <objectgroup id="3" name="Collisions">
   <object id="7" x="-16" y="0" width="16" height="640"/>
   <object id="8" x="-16" y="-16" width="384" height="16"/>
-  <object id="10" x="0" y="560" width="352" height="80"/>
+  <object id="10" name="Ground" type="Ground" x="0" y="560" width="352" height="80"/>
   <object id="69" x="240" y="480" width="48" height="16"/>
   <object id="71" type="Platform" x="128" y="160" width="96" height="16"/>
   <object id="72" x="352" y="0" width="16" height="640"/>

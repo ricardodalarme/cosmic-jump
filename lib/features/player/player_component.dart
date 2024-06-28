@@ -148,7 +148,10 @@ class PlayerComponent extends SpriteAnimationGroupComponent<PlayerState>
     if (!reachedCheckpoint) {
       if (other is MapItemComponent) other.collidedWithPlayer();
       if (other is SawComponent) _respawn();
-      if (other is MeteorComponent) _respawn();
+      if (other is MeteorComponent) {
+        other.explode();
+        _respawn();
+      }
       if (other is CheckpointComponent) _reachedCheckpoint();
     }
     super.onCollisionStart(intersectionPoints, other);

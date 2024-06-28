@@ -42,7 +42,7 @@
                 3
             ],
             "scale": 1.5,
-            "selectedLayer": 1,
+            "selectedLayer": 3,
             "viewCenter": {
                 "x": 184.33333333333331,
                 "y": 316.6666666666667
@@ -81,10 +81,10 @@
                 3
             ],
             "scale": 1.7604687499999998,
-            "selectedLayer": 1,
+            "selectedLayer": 3,
             "viewCenter": {
                 "x": 184.32590751752906,
-                "y": 268.1104109345877
+                "y": 439.08760095855155
             }
         },
         "mercury.tmx": {

@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 class DialogueTextBox extends TextBoxComponent {
   DialogueTextBox({required super.text})
       : super(
-          position: Vector2(16, 16),
-          size: Vector2(380, 96),
+          position: Vector2(8, 16),
+          size: Vector2(340, 102),
           textRenderer: TextPaint(
             style: const TextStyle(
               fontSize: fontSize,

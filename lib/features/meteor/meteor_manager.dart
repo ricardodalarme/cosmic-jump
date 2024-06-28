@@ -7,7 +7,7 @@ import 'package:flame/components.dart';
 
 class MeteorManager extends Component with HasGameRef<CosmicJump> {
   final Random _random = Random();
-  static const double _spawnInterval = 2; // Seconds
+  static const double _spawnInterval = 1; // Seconds
   double _spawnTimer = 0;
 
   CosmicWorld worldd;
