@@ -10,11 +10,13 @@ import 'package:cosmic_jump/pages/game/hud/jump_button.dart';
 import 'package:cosmic_jump/pages/inventory/inventory_page.dart';
 import 'package:cosmic_jump/pages/menu/menu_page.dart';
 import 'package:cosmic_jump/pages/pause/pause_page.dart';
+import 'package:cosmic_jump/utils/screen_size.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flame/input.dart';
 import 'package:flutter/painting.dart';
+
 
 class CosmicJump extends FlameGame
     with
@@ -130,8 +132,8 @@ class CosmicJump extends FlameGame
     );
     cam = CameraComponent.withFixedResolution(
       world: world,
-      width: 360,
-      height: 640,
+      width: screenWidth,
+      height: screenHeight,
     );
     cam.viewfinder.anchor = Anchor.topLeft;
 
