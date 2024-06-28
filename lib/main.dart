@@ -13,7 +13,7 @@ void main() async {
   await Flame.device.fullScreen();
   await Flame.device.setPortraitUpOnly();
 
-  if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
+  if (!kIsWeb && (Platform.isWindows || Platform.isLinux || Platform.isMacOS)) {
     setWindowTitle('Cosmic Jump');
 
     setWindowMaxSize(screenSize);
