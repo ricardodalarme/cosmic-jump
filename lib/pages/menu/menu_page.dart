@@ -19,7 +19,7 @@ class MenuPage extends Component with HasGameReference<CosmicJump> {
         text: 'CosmicJump',
         textRenderer: TextPaint(
           style: const TextStyle(
-            fontSize: 54,
+            fontSize: 48,
             color: Color(0xFFC8FFF5),
             fontWeight: FontWeight.w800,
           ),
@@ -30,7 +30,7 @@ class MenuPage extends Component with HasGameReference<CosmicJump> {
         text: 'Mercúrio',
         action: () => game.router.pushRoute(GamePage.route(0)),
         color: const Color(0xffadde6c),
-        borderColor: const Color(0xffedffab),
+        borderColor: const Color(0xfffff4c7),
       ),
       _button2 = RoundedButton(
         text: 'Vênus',
@@ -57,10 +57,10 @@ class MenuPage extends Component with HasGameReference<CosmicJump> {
   @override
   void onGameResize(Vector2 size) {
     super.onGameResize(size);
-    _logo.position = Vector2(size.x / 2, size.y / 3);
-    _button1.position = Vector2(size.x / 2, _logo.y + 140);
-    _button2.position = Vector2(size.x / 2, _logo.y + 190);
-    _button3.position = Vector2(size.x / 2, _logo.y + 240);
-    _inventoryButton.position = Vector2(size.x / 2, _logo.y + 420);
+    _logo.position = Vector2(size.x / 2, size.y / 4);
+    _button1.position = Vector2(size.x / 2, _logo.y + 120);
+    _button2.position = Vector2(size.x / 2, _logo.y + 170);
+    _button3.position = Vector2(size.x / 2, _logo.y + 220);
+    _inventoryButton.position = Vector2(size.x / 2, _logo.y + 360);
   }
 }
