@@ -32,7 +32,7 @@ class FogComponent extends PositionComponent {
     _paint.color = Colors.white.withAlpha(100);
 
     for (double x = position.x - size.x;
-        x < size.x * 2;
+        x < size.x * 20;
         x += fogSprite.srcSize.x) {
       for (double y = 0; y < size.y; y += fogSprite.srcSize.y) {
         fogSprite.render(

@@ -146,12 +146,12 @@ class InventoryComponent extends PositionComponent
   @override
   Future<void> onLoad() async {
     super.onLoad();
-    size = Vector2(315, 375);
+    size = Vector2(260, 375);
     position = Vector2(0, 70);
 
     _draggableInventoryItem = DraggableInventoryItem();
-    _inventoryEquipmentHUD = InventoryEquipmentHUD(position: Vector2(330, 0));
-    _descriptionHUD = ItemDetailsHUD(position: Vector2(0, 450));
+    _inventoryEquipmentHUD = InventoryEquipmentHUD(position: Vector2(290, 0));
+    _descriptionHUD = ItemDetailsHUD(position: Vector2(0, 400));
 
     await addAll(
       [
@@ -171,7 +171,7 @@ class InventoryComponent extends PositionComponent
     final itemSize = Vector2(50, 50);
     const margin = 10;
     const rows = 5;
-    const cols = 5;
+    const cols = 4;
     final items = inventory.items;
     for (var i = 0; i < items.length; i++) {
       final row = i ~/ rows;
@@ -210,7 +210,7 @@ class InventoryComponent extends PositionComponent
     final itemSize = Vector2(50, 50);
     const margin = 10;
     const rows = 5;
-    const cols = 5;
+    const cols = 4;
 
     final localPosition = event.localPosition;
     for (var i = 0; i < items.length; i++) {
@@ -253,7 +253,7 @@ class InventoryComponent extends PositionComponent
       final itemSize = Vector2(50, 50);
       const margin = 10;
       const rows = 5;
-      const cols = 5;
+      const cols = 4;
 
       final localPosition = lastDragPosition!;
       int newSlot = -1;
