@@ -17,7 +17,6 @@ import 'package:flame/game.dart';
 import 'package:flame/input.dart';
 import 'package:flutter/painting.dart';
 
-
 class CosmicJump extends FlameGame
     with
         HasKeyboardHandlerComponents,
@@ -116,10 +115,11 @@ class CosmicJump extends FlameGame
   }
 
   void loadNextLevel() {
-    if (currentLevelIndex < planets.length) {
+    if (currentLevelIndex < planets.length - 1) {
       loadLevel(currentLevelIndex + 1);
     } else {
-      loadLevel(0);
+      unloadCurrentLevel();
+      router.pop();
     }
   }
 
