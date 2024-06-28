@@ -55,9 +55,8 @@ class CosmicWorld extends World with HasGameRef<CosmicJump> {
     final lightSources = [
       LightSource(position: Vector2(0, 0), radius: radius),
     ];
-
     final lightAndDarknessComponent = LightAndDarknessComponent(
-      size: game.size,
+      size: game.size + Vector2(0, 50),
       lightSources: lightSources,
       player: game.player,
       visibility: planet.visibility,
