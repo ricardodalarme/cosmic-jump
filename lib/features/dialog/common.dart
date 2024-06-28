@@ -1,1 +1,1 @@
-const double fontSize = 18;
+const double fontSize = 16;

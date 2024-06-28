@@ -77,7 +77,7 @@ class CosmicWorld extends World with HasGameRef<CosmicJump> {
       image,
       position: Vector2(
         game.size.x / 2 - image.width / 2,
-        game.size.y / 2 - image.height / 2,
+        game.size.y / 2.5 - image.height / 2,
       ),
     );
     game.camera.viewport.add(background);
