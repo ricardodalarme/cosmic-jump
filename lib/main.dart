@@ -8,6 +8,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Flame.device.fullScreen();
   await Flame.device.setPortraitUpOnly();
+  Flame.device.
 
   final game = CosmicJump();
   runApp(
