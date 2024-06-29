@@ -4,7 +4,7 @@ import 'package:flame/components.dart';
 import 'package:jenny/jenny.dart';
 
 class DialogueBoxComponent extends SpriteComponent with HasGameReference {
-  DialogueTextBox textBox = DialogueTextBox(text: '');
+  late final DialogueTextBox textBox;
   final Vector2 spriteSize = Vector2(736, 128);
   late final ButtonRow buttonRow;
 
@@ -18,6 +18,7 @@ class DialogueBoxComponent extends SpriteComponent with HasGameReference {
     );
     size = Vector2(game.size.x - 10, 175);
     buttonRow = ButtonRow(size: size);
+    textBox = DialogueTextBox(size: size - Vector2(20, 20));
     await addAll([buttonRow, textBox]);
     return super.onLoad();
   }

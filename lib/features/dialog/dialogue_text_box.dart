@@ -3,10 +3,9 @@ import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
 
 class DialogueTextBox extends TextBoxComponent {
-  DialogueTextBox({required super.text})
+  DialogueTextBox({super.text = '', super.size})
       : super(
           position: Vector2(8, 16),
-          size: Vector2(340, 102),
           textRenderer: TextPaint(
             style: const TextStyle(
               fontSize: fontSize,
