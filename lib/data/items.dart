@@ -1,4 +1,4 @@
-import 'package:cosmic_jump/features/item/item_model.dart';
+import 'package:cosmic_jump/models/item_model.dart';
 
 const List<ItemModel> items = [
   JetpackItemModel(
