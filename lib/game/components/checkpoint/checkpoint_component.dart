@@ -1,11 +1,10 @@
 import 'dart:async';
 
-import 'package:cosmic_jump/game/cosmic_jump.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 
 class CheckpointComponent extends SpriteComponent
-    with HasGameRef<CosmicJump>, CollisionCallbacks {
+    with HasGameRef, CollisionCallbacks {
   CheckpointComponent({
     super.position,
     super.size,

@@ -1,11 +1,9 @@
 import 'dart:async';
 
-import 'package:cosmic_jump/game/cosmic_jump.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 
-class SawComponent extends SpriteAnimationComponent
-    with HasGameRef<CosmicJump> {
+class SawComponent extends SpriteAnimationComponent with HasGameRef {
   final bool isVertical;
   final double offNeg;
   final double offPos;

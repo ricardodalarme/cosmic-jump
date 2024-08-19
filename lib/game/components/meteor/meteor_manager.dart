@@ -1,18 +1,12 @@
 import 'dart:math';
 
 import 'package:cosmic_jump/game/components/meteor/meteor_component.dart';
-import 'package:cosmic_jump/game/cosmic_jump.dart';
-import 'package:cosmic_jump/game/cosmic_world.dart';
 import 'package:flame/components.dart';
 
-class MeteorManager extends Component with HasGameRef<CosmicJump> {
+class MeteorManager extends Component with HasGameRef {
   final Random _random = Random();
   static const double _spawnInterval = 1; // Seconds
   double _spawnTimer = 0;
-
-  CosmicWorld worldd;
-
-  MeteorManager(this.worldd);
 
   @override
   void update(double dt) {
@@ -25,9 +19,9 @@ class MeteorManager extends Component with HasGameRef<CosmicJump> {
   }
 
   void spawnMeteor() {
-    final meteor = MeteorComponent(worldd)
+    final meteor = MeteorComponent()
       ..position =
-          Vector2(_random.nextDouble() * gameRef.cam.viewport.size.x, 0);
+          Vector2(_random.nextDouble() * gameRef.camera.viewport.size.x, 0);
     add(meteor);
   }
 }

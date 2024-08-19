@@ -14,7 +14,7 @@ class BackButton extends SpriteComponent with HasGameRef, TapCallbacks {
     sprite = Sprite(game.images.fromCache('HUD/Back.png'));
     position = Vector2(
       game.size.x - margin - sprite!.image.width,
-      0,
+      margin,
     );
     priority = 10;
     return super.onLoad();

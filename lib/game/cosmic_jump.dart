@@ -21,7 +21,6 @@ class CosmicJump extends FlameGame
         TapCallbacks {
   @override
   Color backgroundColor() => const Color(0xFF0d0814);
-  late CameraComponent cam;
 
   // final AccountModel account = AccountModel();
   PlayerComponent player = PlayerComponent();
@@ -103,14 +102,14 @@ class CosmicJump extends FlameGame
     final CosmicWorld world = CosmicWorld(
       planet: planet,
     );
-    cam = CameraComponent.withFixedResolution(
+    camera = CameraComponent.withFixedResolution(
       world: world,
       width: screenWidth,
       height: screenHeight,
     );
-    cam.viewfinder.anchor = Anchor.topLeft;
+    camera.viewfinder.anchor = Anchor.topLeft;
 
-    addAll([cam, world]);
+    addAll([camera, world]);
   }
 
   void unloadCurrentLevel() {

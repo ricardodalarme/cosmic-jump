@@ -1,11 +1,9 @@
 import 'dart:async';
 
-import 'package:cosmic_jump/game/cosmic_jump.dart';
 import 'package:cosmic_jump/models/item_model.dart';
 import 'package:flame/components.dart';
 
-class ItemComponent extends SpriteAnimationComponent
-    with HasGameRef<CosmicJump> {
+class ItemComponent extends SpriteAnimationComponent with HasGameRef {
   final ItemModel item;
 
   ItemComponent({

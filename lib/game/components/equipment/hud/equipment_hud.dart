@@ -1,11 +1,10 @@
 import 'dart:ui';
 
-import 'package:cosmic_jump/game/cosmic_jump.dart';
 import 'package:cosmic_jump/models/equipment_manager.dart';
 import 'package:flame/components.dart';
 import 'package:flame/image_composition.dart';
 
-class EquipmentHud extends PositionComponent with HasGameRef<CosmicJump> {
+class EquipmentHud extends PositionComponent with HasGameRef {
   final EquipmentsManager playerEquipment;
 
   EquipmentHud({

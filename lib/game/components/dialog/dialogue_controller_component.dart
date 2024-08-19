@@ -9,8 +9,7 @@ class DialogueControllerComponent extends Component
   Completer<void> _forwardCompleter = Completer();
   Completer<int> _choiceCompleter = Completer<int>();
   Completer<void> _closeCompleter = Completer();
-  late final DialogueBoxComponent _dialogueBoxComponent =
-      DialogueBoxComponent();
+  final DialogueBoxComponent _dialogueBoxComponent = DialogueBoxComponent();
 
   @override
   Future<void> onNodeStart(Node node) async {

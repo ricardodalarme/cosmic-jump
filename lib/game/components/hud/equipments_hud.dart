@@ -1,9 +1,8 @@
 import 'package:cosmic_jump/data/account.dart';
 import 'package:cosmic_jump/game/components/item/item_component.dart';
-import 'package:cosmic_jump/game/cosmic_jump.dart';
 import 'package:flame/components.dart';
 
-class EquipmentsHud extends PositionComponent with HasGameRef<CosmicJump> {
+class EquipmentsHud extends PositionComponent with HasGameRef {
   EquipmentsHud() : super(position: _position);
 
   static final Vector2 _position = Vector2(0, 54);

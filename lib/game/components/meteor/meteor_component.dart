@@ -1,6 +1,5 @@
 import 'dart:math';
 
-import 'package:cosmic_jump/game/cosmic_jump.dart';
 import 'package:cosmic_jump/game/cosmic_world.dart';
 import 'package:cosmic_jump/game/utils/check_collision.dart';
 import 'package:cosmic_jump/game/utils/custom_hitbox.dart';
@@ -10,7 +9,7 @@ import 'package:flame/particles.dart';
 import 'package:flutter/material.dart';
 
 class MeteorComponent extends SpriteAnimationComponent
-    with HasGameRef<CosmicJump>, CollisionCallbacks {
+    with HasGameRef, CollisionCallbacks {
   final double fallSpeed = 200;
   static const double stepTime = 0.05;
 
@@ -24,10 +23,9 @@ class MeteorComponent extends SpriteAnimationComponent
   double fixedDeltaTime = 1 / 60;
   double accumulatedTime = 0;
 
-  CosmicWorld worldd;
   bool isExploding = false;
 
-  MeteorComponent(this.worldd) {
+  MeteorComponent() {
     size = Vector2.all(48);
   }
 
@@ -82,7 +80,8 @@ class MeteorComponent extends SpriteAnimationComponent
   }
 
   Future<void> _checkVerticalCollisions() async {
-    for (final block in worldd.collisionBlocks) {
+    final world = findParent<CosmicWorld>()!;
+    for (final block in world.collisionBlocks) {
       if (block.isGround) {
         if (checkCollision(this, hitbox, block)) {
           await explode();
@@ -113,7 +112,9 @@ class MeteorComponent extends SpriteAnimationComponent
       ),
     );
 
-    worldd.add(particleComponent);
+    final world = findParent<CosmicWorld>()!;
+
+    world.add(particleComponent);
 
     removeFromParent();
   }
