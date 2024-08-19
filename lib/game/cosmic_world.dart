@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:cosmic_jump/data/items.dart';
 import 'package:cosmic_jump/game/components/checkpoint/checkpoint_component.dart';
+import 'package:cosmic_jump/game/components/dialog/dialogue_controller_component.dart';
 import 'package:cosmic_jump/game/components/fog/fog_component.dart';
 import 'package:cosmic_jump/game/components/hud/back_button.dart';
 import 'package:cosmic_jump/game/components/hud/main_hud.dart';
@@ -15,6 +16,8 @@ import 'package:cosmic_jump/game/utils/collision_block.dart';
 import 'package:cosmic_jump/models/planet_model.dart';
 import 'package:flame/components.dart';
 import 'package:flame_tiled/flame_tiled.dart';
+import 'package:flutter/services.dart';
+import 'package:jenny/jenny.dart';
 
 class CosmicWorld extends World with HasGameRef<CosmicJump> {
   CosmicWorld({
@@ -27,6 +30,7 @@ class CosmicWorld extends World with HasGameRef<CosmicJump> {
 
   @override
   FutureOr<void> onLoad() async {
+    super.onLoad();
     level = await TiledComponent.load('${planet.id}.tmx', Vector2.all(16));
 
     add(level);
@@ -36,10 +40,6 @@ class CosmicWorld extends World with HasGameRef<CosmicJump> {
 
     if (planet.fog != null) {
       add(FogComponent(planet.fog!));
-    }
-
-    if (planet.hasMeteorShower) {
-      add(MeteorManager(this));
     }
 
     double radius = 40;
@@ -61,9 +61,28 @@ class CosmicWorld extends World with HasGameRef<CosmicJump> {
     add(lightAndDarknessComponent);
 
     _addHud();
-    // await _startDialogue();
+    unawaited(_startDialogue());
+  }
 
-    super.onLoad();
+  void _spawnAfterDialogue() {
+    if (planet.hasMeteorShower) {
+      add(MeteorManager());
+    }
+  }
+
+  Future<void> _startDialogue() async {
+    final dialogueControllerComponent = DialogueControllerComponent();
+    game.add(dialogueControllerComponent);
+
+    final yarnProject = YarnProject();
+    yarnProject
+        .parse(await rootBundle.loadString('assets/yarn/${planet.id}.yarn'));
+    final dialogueRunner = DialogueRunner(
+      yarnProject: yarnProject,
+      dialogueViews: [dialogueControllerComponent],
+    );
+    await dialogueRunner.startDialogue('Description');
+    _spawnAfterDialogue();
   }
 
   void _addHud() {
