@@ -185,6 +185,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.10.2"
+  flame_behaviors:
+    dependency: transitive
+    description:
+      name: flame_behaviors
+      sha256: "177aa671df88ecdaf01c28e8f6fbdb83a69ce923dc7c1b551cfc1b34df0386c7"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.0"
   flame_tiled:
     dependency: "direct main"
     description:
@@ -280,6 +288,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.1"
+  leap:
+    dependency: "direct main"
+    description:
+      name: leap
+      sha256: "12bd92d3d824c953b542d7117bb56f6ddfc6d52ec2d426b4eba17583472ddd42"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.8.0"
   matcher:
     dependency: transitive
     description:
@@ -545,10 +561,10 @@ packages:
     dependency: transitive
     description:
       name: vm_service
-      sha256: f652077d0bdf60abe4c1f6377448e8655008eef28f128bc023f7b5e8dfeb48fc
+      sha256: "5c5f338a667b4c644744b661f309fb8080bb94b18a7e91ef1dbd343bed00ed6d"
       url: "https://pub.dev"
     source: hosted
-    version: "14.2.4"
+    version: "14.2.5"
   web:
     dependency: transitive
     description:
