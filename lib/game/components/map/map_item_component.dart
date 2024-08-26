@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:cosmic_jump/game/components/item/item_component.dart';
 import 'package:cosmic_jump/game/cosmic_jump.dart';
-import 'package:cosmic_jump/game/utils/custom_hitbox.dart';
 import 'package:cosmic_jump/models/item_model.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
@@ -19,13 +18,6 @@ class MapItemComponent extends PositionComponent
     super.size,
   }) : super(priority: -1);
 
-  static const _hitbox = CustomHitbox(
-    offsetX: 10,
-    offsetY: 10,
-    width: 12,
-    height: 12,
-  );
-
   bool _collected = false;
 
   static const double _collectStepTime = 0.05;
@@ -34,12 +26,13 @@ class MapItemComponent extends PositionComponent
 
   @override
   FutureOr<void> onLoad() {
+    size = Vector2.all(12);
     _itemComponent = ItemComponent(item: item);
 
     addAll([
       RectangleHitbox(
-        position: Vector2(_hitbox.offsetX, _hitbox.offsetY),
-        size: Vector2(_hitbox.width, _hitbox.height),
+        position: Vector2(10, 10),
+        size: Vector2(12, 12),
         collisionType: CollisionType.passive,
       ),
       _itemComponent,

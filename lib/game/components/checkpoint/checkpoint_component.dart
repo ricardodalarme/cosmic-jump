@@ -1,28 +1,37 @@
-import 'dart:async';
-
-import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
+import 'package:flame_tiled/flame_tiled.dart';
+import 'package:leap/leap.dart';
 
-class CheckpointComponent extends SpriteComponent
-    with HasGameRef, CollisionCallbacks {
-  CheckpointComponent({
-    super.position,
-    super.size,
-  });
+class CheckpointComponent extends PhysicalEntity with HasGameRef {
+  CheckpointComponent(TiledObject tiledObject) : super(static: true) {
+    size = tiledObject.size;
+    position = tiledObject.position;
+    position = Vector2(tiledObject.x, tiledObject.y);
+    priority = 2;
+  }
 
   @override
-  FutureOr<void> onLoad() {
+  void onLoad() {
+    super.onLoad();
+
+    final sprite =
+        game.images.fromCache('Items/Checkpoints/Checkpoint/Rocket.png');
+
     add(
-      RectangleHitbox(
-        position: Vector2(0, 0),
+      SpriteComponent(
+        sprite: Sprite(sprite),
         size: size,
-        collisionType: CollisionType.passive,
       ),
     );
+  }
+}
 
-    sprite = Sprite(
-      game.images.fromCache('Items/Checkpoints/Checkpoint/Rocket.png'),
-    );
-    return super.onLoad();
+class CheckpointFactory implements TiledObjectHandler {
+  const CheckpointFactory();
+
+  @override
+  void handleObject(TiledObject object, Layer layer, LeapMap map) {
+    final checkpoint = CheckpointComponent(object);
+    map.add(checkpoint);
   }
 }

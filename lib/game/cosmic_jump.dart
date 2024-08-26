@@ -1,118 +1,149 @@
-import 'dart:async';
-
-import 'package:cosmic_jump/game/components/hud/jetpack_button.dart';
-import 'package:cosmic_jump/game/components/hud/jump_button.dart';
+import 'package:cosmic_jump/game/components/checkpoint/checkpoint_component.dart';
+import 'package:cosmic_jump/game/components/coin/coin_component.dart';
+import 'package:cosmic_jump/game/components/fog/fog_component.dart';
+import 'package:cosmic_jump/game/components/hud/back_button.dart';
+import 'package:cosmic_jump/game/components/hud/main_hud.dart';
+import 'package:cosmic_jump/game/components/light/light_component.dart';
+import 'package:cosmic_jump/game/components/meteor/meteor_manager.dart';
 import 'package:cosmic_jump/game/components/player/player_component.dart';
-import 'package:cosmic_jump/game/cosmic_world.dart';
-import 'package:cosmic_jump/game/utils/screen_size.dart';
-import 'package:cosmic_jump/main.dart';
 import 'package:cosmic_jump/models/planet_model.dart';
-import 'package:flame/components.dart';
+import 'package:cosmic_jump/utils/screen_size.dart';
+import 'package:flame/camera.dart';
 import 'package:flame/events.dart';
+import 'package:flame/experimental.dart';
 import 'package:flame/game.dart';
-import 'package:flame/input.dart';
-import 'package:flutter/painting.dart';
+import 'package:flutter/services.dart';
+import 'package:leap/leap.dart';
 
-class CosmicJump extends FlameGame
-    with
-        HasKeyboardHandlerComponents,
-        DragCallbacks,
-        HasCollisionDetection,
-        TapCallbacks {
-  @override
-  Color backgroundColor() => const Color(0xFF0d0814);
+class CosmicJump extends LeapGame
+    with SingleGameInstance, TapCallbacks, HasKeyboardHandlerComponents {
+  CosmicJump(this.planet) : super(tileSize: _tileSize, world: LeapWorld());
 
-  // final AccountModel account = AccountModel();
-  PlayerComponent player = PlayerComponent();
-  late JoystickComponent joystick;
-  bool showControls = false;
+  final PlanetModel planet;
+  final PlayerComponent player = PlayerComponent();
+  late final FourButtonInput input;
+
   bool playSounds = false;
   double soundVolume = 1;
 
-  int starsCollected = 0;
+  static const double _tileSize = 16;
 
-  static const double maxHealth = 5;
+  Future<void> _loadLevel() async {
+    final groundTileHandlers = {
+      'OneWayTopPlatform': OneWayTopPlatformHandler(),
+    };
+
+    const tiledObjectHandlers = {
+      'Coin': CoinFactory(),
+      'Checkpoint': CheckpointFactory(),
+    };
+
+    return loadWorldAndMap(
+      tiledMapPath: '${planet.id}.tmx',
+      groundTileHandlers: groundTileHandlers,
+      tiledObjectHandlers: tiledObjectHandlers,
+    );
+  }
 
   @override
-  FutureOr<void> onLoad() async {
+  Future<void> onLoad() async {
+    super.onLoad();
+
     // Load all images into cache
     await images.loadAllImages();
 
-    if (showControls) {
-      addJoystick();
-      await addAll([
-        JumpButton(),
-        JetpackButton(),
-      ]);
-    }
-
-    return super.onLoad();
-  }
-
-  @override
-  void update(double dt) {
-    if (showControls) {
-      updateJoystick();
-    }
-    super.update(dt);
-  }
-
-  void addJoystick() {
-    joystick = JoystickComponent(
-      priority: 10,
-      knob: SpriteComponent(
-        sprite: Sprite(
-          images.fromCache('HUD/Knob.png'),
-        ),
-      ),
-      background: SpriteComponent(
-        sprite: Sprite(
-          images.fromCache('HUD/Joystick.png'),
-        ),
-      ),
-      margin: const EdgeInsets.only(left: 32, bottom: 32),
-    );
-
-    add(joystick);
-  }
-
-  void updateJoystick() {
-    switch (joystick.direction) {
-      case JoystickDirection.left:
-      case JoystickDirection.upLeft:
-      case JoystickDirection.downLeft:
-        player.horizontalMovement = -1;
-      case JoystickDirection.right:
-      case JoystickDirection.upRight:
-      case JoystickDirection.downRight:
-        player.horizontalMovement = 1;
-      default:
-        player.horizontalMovement = 0;
-    }
-  }
-
-  void loadNextLevel() {
-    unloadCurrentLevel();
-    navigatorKey.currentState?.pop();
-  }
-
-  void loadLevel(PlanetModel planet) {
-    removeWhere((component) => component is CosmicWorld);
-
-    final CosmicWorld world = CosmicWorld(
-      planet: planet,
-    );
+    // Default the camera size to the bounds of the Tiled map.
     camera = CameraComponent.withFixedResolution(
       world: world,
       width: screenWidth,
       height: screenHeight,
     );
-    camera.viewfinder.anchor = Anchor.topLeft;
 
-    addAll([camera, world]);
+    _addInput();
   }
 
-  void unloadCurrentLevel() {
-    removeWhere((component) => component is CosmicWorld);
+  @override
+  Future<void> onMount() async {
+    super.onMount();
+    await _loadLevel();
+
+    // Don't let the camera move outside the bounds of the map, inset
+    // by half the viewport size to the edge of the camera if flush with the
+    // edge of the map.
+    final inset = camera.viewport.virtualSize;
+    camera.setBounds(
+      Rectangle.fromLTWH(
+        inset.x / 2,
+        inset.y / 2,
+        leapMap.width - inset.x,
+        leapMap.height - inset.y,
+      ),
+    );
+
+    _addHud();
+  }
+
+  @override
+  void onMapUnload(LeapMap map) {
+    player.removeFromParent();
+  }
+
+  @override
+  void onMapLoaded(LeapMap map) {
+    _spawnPlayer();
+    _spawnMap();
+    _spawnAfterDialogue();
+  }
+
+  void _spawnMap() {
+    double radius = 40;
+
+    if (planet.fog != null) {
+      world.add(FogComponent(planet.fog!));
+    }
+
+    if (player.hasNightVision) {
+      radius = 100;
+    }
+
+    final lightSources = [
+      LightSource(position: Vector2(0, 0), radius: radius),
+    ];
+    final lightAndDarknessComponent = LightAndDarknessComponent(
+      size: size + Vector2(0, 50),
+      lightSources: lightSources,
+      player: player,
+      visibility: planet.visibility,
+    );
+
+    world.add(lightAndDarknessComponent);
+  }
+
+  void _spawnPlayer() {
+    world.add(player);
+    camera.follow(player);
+  }
+
+  void _spawnAfterDialogue() {
+    if (planet.hasMeteorShower) {
+      world.add(MeteorManager());
+    }
+  }
+
+  void _addInput() {
+    input = FourButtonInput(
+      keyboardInput: FourButtonKeyboardInput(
+        upKeys: {PhysicalKeyboardKey.space},
+        downKeys: {PhysicalKeyboardKey.keyX},
+      ),
+    );
+    add(input);
+  }
+
+  void _addHud() {
+    camera.viewport.addAll([
+      MainHud(),
+      BackButton(),
+    ]);
   }
 }

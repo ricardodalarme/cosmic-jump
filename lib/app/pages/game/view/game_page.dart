@@ -31,8 +31,7 @@ class _GamePageState extends State<GamePage> {
   @override
   void initState() {
     super.initState();
-    _game = CosmicJump();
-    _game.loadLevel(widget.planet);
+    _game = CosmicJump(widget.planet);
   }
 
   @override

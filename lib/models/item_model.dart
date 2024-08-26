@@ -13,7 +13,7 @@ class ItemModel {
 }
 
 final class EquipmentItemModel extends ItemModel {
-  final double poisonResistance;
+  final int poisonResistance;
 
   const EquipmentItemModel({
     required super.name,

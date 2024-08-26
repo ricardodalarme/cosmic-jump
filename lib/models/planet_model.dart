@@ -33,7 +33,7 @@ class PlanetModel {
   final bool isPlayable;
   final double gravity;
   final FogModel? fog;
-  final double poison;
+  final int poison;
   final bool hasMeteorShower;
   final double visibility;
 }

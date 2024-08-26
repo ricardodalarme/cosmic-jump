@@ -9,6 +9,9 @@ class MeteorManager extends Component with HasGameRef {
   double _spawnTimer = 0;
 
   @override
+  int get priority => 2;
+
+  @override
   void update(double dt) {
     super.update(dt);
     _spawnTimer += dt;

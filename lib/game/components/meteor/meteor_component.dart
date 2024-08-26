@@ -1,24 +1,17 @@
 import 'dart:math';
+import 'dart:ui';
 
-import 'package:cosmic_jump/game/cosmic_world.dart';
-import 'package:cosmic_jump/game/utils/check_collision.dart';
-import 'package:cosmic_jump/game/utils/custom_hitbox.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/particles.dart';
-import 'package:flutter/material.dart';
+import 'package:leap/leap.dart';
 
-class MeteorComponent extends SpriteAnimationComponent
+class MeteorComponent extends PhysicalEntity
     with HasGameRef, CollisionCallbacks {
   final double fallSpeed = 200;
-  static const double stepTime = 0.05;
+  static const double _stepTime = 0.05;
 
-  static const CustomHitbox hitbox = CustomHitbox(
-    offsetX: 0,
-    offsetY: 10,
-    width: 38,
-    height: 38,
-  );
+  late final SpriteAnimation animation;
 
   double fixedDeltaTime = 1 / 60;
   double accumulatedTime = 0;
@@ -26,24 +19,26 @@ class MeteorComponent extends SpriteAnimationComponent
   bool isExploding = false;
 
   MeteorComponent() {
-    size = Vector2.all(48);
+    size = Vector2.all(38);
   }
 
   @override
   Future<void> onLoad() async {
+    super.onLoad();
+
     animation = SpriteAnimation.fromFrameData(
       game.images.fromCache('Asteroids/Asteroid.png'),
       SpriteAnimationData.sequenced(
         amount: 3,
-        stepTime: stepTime,
+        stepTime: _stepTime,
         textureSize: Vector2.all(48),
       ),
     );
 
     add(
-      RectangleHitbox(
-        position: Vector2(hitbox.offsetX, hitbox.offsetY),
-        size: Vector2(hitbox.width, hitbox.height),
+      SpriteAnimationComponent(
+        animation: animation,
+        size: Vector2.all(48),
       ),
     );
   }
@@ -80,22 +75,19 @@ class MeteorComponent extends SpriteAnimationComponent
   }
 
   Future<void> _checkVerticalCollisions() async {
-    final world = findParent<CosmicWorld>()!;
-    for (final block in world.collisionBlocks) {
-      if (block.isGround) {
-        if (checkCollision(this, hitbox, block)) {
-          await explode();
-        }
-      }
-    }
+    // final world = findParent<World>()!;
+    // for (final block in world.collisionBlocks) {
+    //   if (block.isGround) {
+    //     if (checkCollision(this, hitbox, block)) {
+    //       await explode();
+    //     }
+    //   }
+    // }
   }
 
   Future<void> explode() async {
     isExploding = true;
 
-    // Generate 20 white circle particles with random speed and acceleration,
-    // at current position of this enemy. Each particles lives for exactly
-    // 0.1 seconds and will get removed from the game world after that.
     final particleComponent = ParticleSystemComponent(
       particle: Particle.generate(
         count: 35,
@@ -106,15 +98,13 @@ class MeteorComponent extends SpriteAnimationComponent
           position: position.clone(),
           child: CircleParticle(
             radius: 1.5,
-            paint: Paint()..color = Colors.orange[100]!,
+            paint: Paint()..color = const Color(0xFFFFA500),
           ),
         ),
       ),
     );
 
-    final world = findParent<CosmicWorld>()!;
-
-    world.add(particleComponent);
+    game.world.add(particleComponent);
 
     removeFromParent();
   }
