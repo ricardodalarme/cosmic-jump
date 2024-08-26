@@ -45,8 +45,8 @@
             "scale": 1.5,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 369,
-                "y": 630.6666666666666
+                "x": 291,
+                "y": 518
             }
         },
         "Mercury.tmx#Pixel Adventure": {
@@ -98,7 +98,7 @@
             "selectedLayer": 1,
             "viewCenter": {
                 "x": 648.6666666666665,
-                "y": 906.6666666666667
+                "y": 871.9999999999999
             }
         },
         "mercury.tmx": {
@@ -145,6 +145,7 @@
         "Venus.tmx"
     ],
     "project": "Pixel Adventure.tiled-project",
+    "property.type": "string",
     "recentFiles": [
         "Venus.tmx",
         "Mercury.tmx",

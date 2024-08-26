@@ -1,3 +1,4 @@
+import 'package:cosmic_jump/game/components/block/block_component.dart';
 import 'package:cosmic_jump/game/components/checkpoint/checkpoint_component.dart';
 import 'package:cosmic_jump/game/components/coin/coin_component.dart';
 import 'package:cosmic_jump/game/components/fog/fog_component.dart';
@@ -5,6 +6,7 @@ import 'package:cosmic_jump/game/components/hud/back_button.dart';
 import 'package:cosmic_jump/game/components/hud/main_hud.dart';
 import 'package:cosmic_jump/game/components/light/light_component.dart';
 import 'package:cosmic_jump/game/components/meteor/meteor_manager.dart';
+import 'package:cosmic_jump/game/components/platforms/moving_platform_component.dart';
 import 'package:cosmic_jump/game/components/player/player_component.dart';
 import 'package:cosmic_jump/models/planet_model.dart';
 import 'package:cosmic_jump/utils/screen_size.dart';
@@ -36,6 +38,8 @@ class CosmicJump extends LeapGame
     const tiledObjectHandlers = {
       'Coin': CoinFactory(),
       'Checkpoint': CheckpointFactory(),
+      'Block': BlockFactory(),
+      'MovingPlatform': MovingPlatformFactory(),
     };
 
     return loadWorldAndMap(
