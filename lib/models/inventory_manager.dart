@@ -1,16 +1,16 @@
-import 'package:cosmic_jump/game/components/inventory/inventory_item_model.dart';
 import 'package:cosmic_jump/models/item_model.dart';
+import 'package:cosmic_jump/models/slot_model.dart';
 
 class InventoryManager {
-  final List<InventoryItemModel?> _items = List.filled(_maxItems, null);
+  final List<SlotModel<ItemModel>?> _items = List.filled(_maxItems, null);
 
-  List<InventoryItemModel?> get items => _items;
+  List<SlotModel<ItemModel>?> get items => _items;
 
   static const _maxItems = 30;
 
   void addItem(ItemModel item, [int quantity = 1]) {
     final existingItem = _items.firstWhere(
-      (element) => element?.item == item,
+      (element) => element?.value == item,
       orElse: () => null,
     );
 
@@ -21,7 +21,7 @@ class InventoryManager {
 
     final slot = _items.indexOf(null);
     if (slot != -1) {
-      _items[slot] = InventoryItemModel(item: item, quantity: quantity);
+      _items[slot] = SlotModel(value: item, quantity: quantity);
     }
   }
 

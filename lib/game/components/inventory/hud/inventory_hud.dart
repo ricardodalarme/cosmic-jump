@@ -1,14 +1,14 @@
 import 'package:cosmic_jump/data/account.dart';
-import 'package:cosmic_jump/game/components/inventory/inventory_item_model.dart';
 import 'package:cosmic_jump/models/inventory_manager.dart';
 import 'package:cosmic_jump/models/item_model.dart';
+import 'package:cosmic_jump/models/slot_model.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/image_composition.dart';
 import 'package:flutter/painting.dart';
 
 class DraggableInventoryItem extends Component with HasGameRef {
-  InventoryItemModel? item;
+  SlotModel<ItemModel>? item;
   Vector2 position = Vector2.zero();
 
   DraggableInventoryItem() : super(priority: 100);
@@ -19,7 +19,7 @@ class DraggableInventoryItem extends Component with HasGameRef {
     if (item == null) {
       return;
     }
-    final imagePath = item!.item.imagePath;
+    final imagePath = item!.value.imagePath;
     final Image image = game.images.fromCache(imagePath);
     canvas.drawImage(image, position.toOffset(), Paint());
   }
@@ -186,7 +186,7 @@ class InventoryComponent extends PositionComponent
 
       // if item is equipped, draw a border around it
       if (item != null &&
-          account.equipments.equippedItems.contains(item.item)) {
+          account.equipments.equippedItems.contains(item.value)) {
         final paint2 = Paint()
           ..color = const Color.fromARGB(255, 255, 255, 255).withBlue(255)
           ..strokeWidth = 2
@@ -196,7 +196,7 @@ class InventoryComponent extends PositionComponent
       canvas.drawRect(itemRect, paint);
 
       if (item != null) {
-        final imagePath = item.item.imagePath;
+        final imagePath = item.value.imagePath;
         final Image image = game.images.fromCache(imagePath);
         canvas.drawImage(image, itemPosition.toOffset(), Paint());
       }
@@ -257,7 +257,7 @@ class InventoryComponent extends PositionComponent
       final localPosition = lastDragPosition!;
       int newSlot = -1;
 
-      final currentItem = inventory.items[draggedItemIndex!]?.item;
+      final currentItem = inventory.items[draggedItemIndex!]?.value;
 
       if (currentItem is EquipmentItemModel) {
         // check if we are dropping on the equipment HUD and equip the item
@@ -333,7 +333,7 @@ class InventoryComponent extends PositionComponent
       if (itemRect.contains(localPosition.toOffset())) {
         final item = items[i];
         if (item != null) {
-          _descriptionHUD.item = item.item;
+          _descriptionHUD.item = item.value;
         }
         break;
       }
