@@ -3,14 +3,14 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "venus.tmx",
+    "activeFile": "mars.tmx",
     "expandedProjectPaths": [
         "."
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
         "Backgrounds.tsx": {
-            "scaleInDock": 1,
+            "scaleInDock": 0.2841,
             "scaleInEditor": 1
         },
         "Level-01.tmx": {
@@ -38,14 +38,15 @@
         },
         "Mercury.tmx": {
             "expandedObjectLayers": [
+                11,
                 2,
-                3
+                12
             ],
             "scale": 1.5,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 184.33333333333331,
-                "y": 316.6666666666667
+                "x": 369,
+                "y": 630.6666666666666
             }
         },
         "Mercury.tmx#Pixel Adventure": {
@@ -54,6 +55,18 @@
         "Pixel Adventure.tsx": {
             "scaleInDock": 1,
             "scaleInEditor": 4
+        },
+        "Venus.tmx": {
+            "expandedObjectLayers": [
+                2,
+                9
+            ],
+            "scale": 0.5,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": 655,
+                "y": 560
+            }
         },
         "level1.tmx": {
             "expandedObjectLayers": [
@@ -78,13 +91,14 @@
         "mars.tmx": {
             "expandedObjectLayers": [
                 2,
-                3
+                9,
+                8
             ],
-            "scale": 1.7604687499999998,
-            "selectedLayer": 3,
+            "scale": 0.75,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 184.32590751752906,
-                "y": 439.08760095855155
+                "x": 648.6666666666665,
+                "y": 906.6666666666667
             }
         },
         "mercury.tmx": {
@@ -105,14 +119,15 @@
         },
         "venus.tmx": {
             "expandedObjectLayers": [
-                2,
-                3
+                8,
+                9,
+                2
             ],
-            "scale": 1.7604687499999998,
+            "scale": 0.6069,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 168.98908316322007,
-                "y": 298.7840596432058
+                "x": 177.12967539957157,
+                "y": 313.066403031801
             }
         }
     },
@@ -126,14 +141,15 @@
         "Mercury.tmx",
         "Pixel Adventure.tsx",
         "mars.tmx",
-        "venus.tmx",
-        "Backgrounds.tsx"
+        "Backgrounds.tsx",
+        "Venus.tmx"
     ],
     "project": "Pixel Adventure.tiled-project",
     "recentFiles": [
+        "Venus.tmx",
         "Mercury.tmx",
-        "Pixel Adventure.tsx",
         "mars.tmx",
+        "Pixel Adventure.tsx",
         "Backgrounds.tsx",
         "venus.tmx",
         "Level-01.tmx",
