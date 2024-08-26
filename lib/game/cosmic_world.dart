@@ -10,7 +10,6 @@ import 'package:cosmic_jump/game/components/light/light_component.dart';
 import 'package:cosmic_jump/game/components/map/map_item_component.dart';
 import 'package:cosmic_jump/game/components/meteor/meteor_manager.dart';
 import 'package:cosmic_jump/game/components/player/player_component.dart';
-import 'package:cosmic_jump/game/components/trap/saw_component.dart';
 import 'package:cosmic_jump/game/cosmic_jump.dart';
 import 'package:cosmic_jump/game/utils/collision_block.dart';
 import 'package:cosmic_jump/models/planet_model.dart';
@@ -122,19 +121,6 @@ class CosmicWorld extends World with HasGameRef<CosmicJump> {
             size: size,
           );
           add(mapItem);
-        case 'Saw':
-          final isVertical =
-              spawnPoint.properties.getValue<bool>('isVertical')!;
-          final offNeg = spawnPoint.properties.getValue<double>('offNeg')!;
-          final offPos = spawnPoint.properties.getValue<double>('offPos')!;
-          final saw = SawComponent(
-            isVertical: isVertical,
-            offNeg: offNeg,
-            offPos: offPos,
-            position: position,
-            size: size,
-          );
-          add(saw);
         case 'Checkpoint':
           final checkpoint = CheckpointComponent(
             position: position,

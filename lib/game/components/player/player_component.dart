@@ -8,7 +8,6 @@ import 'package:cosmic_jump/game/components/jetpack/jetpack_status.dart';
 import 'package:cosmic_jump/game/components/map/map_item_component.dart';
 import 'package:cosmic_jump/game/components/meteor/meteor_component.dart';
 import 'package:cosmic_jump/game/components/player/player_state.dart';
-import 'package:cosmic_jump/game/components/trap/saw_component.dart';
 import 'package:cosmic_jump/game/cosmic_jump.dart';
 import 'package:cosmic_jump/game/cosmic_world.dart';
 import 'package:cosmic_jump/game/utils/check_collision.dart';
@@ -148,7 +147,6 @@ class PlayerComponent extends SpriteAnimationGroupComponent<PlayerState>
   ) {
     if (!reachedCheckpoint) {
       if (other is MapItemComponent) other.collidedWithPlayer();
-      if (other is SawComponent) _respawn();
       if (other is MeteorComponent) {
         other.explode();
         _respawn();
