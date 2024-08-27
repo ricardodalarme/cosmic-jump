@@ -65,6 +65,8 @@ class PlayerInputBehavior extends PhysicalBehavior<PlayerComponent>
   }
 
   void _jetpack(double dt) {
+    if (parent.jetpack == null) return;
+
     parent.hasUsedJetpack = game.input.isPressedDown;
 
     if (parent.hasUsedJetpack) {
