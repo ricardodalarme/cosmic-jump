@@ -1,4 +1,5 @@
 import 'package:cosmic_jump/game/components/jetpack/jetpack_component.dart';
+import 'package:cosmic_jump/game/components/player/behaviours/player_checkpoint_behaviour.dart';
 import 'package:cosmic_jump/game/components/player/behaviours/player_collision_behaviour.dart';
 import 'package:cosmic_jump/game/components/player/behaviours/player_damage_behaviour.dart';
 import 'package:cosmic_jump/game/components/player/behaviours/player_death_behaviour.dart';
@@ -22,6 +23,7 @@ class PlayerComponent extends JumperCharacter
       JumperAccelerationBehavior(),
       GravityAccelerationBehavior(),
       CollisionDetectionBehavior(),
+      PlayerCheckpointBehavior(),
       PlayerDamageBehavior(),
       PlayerInputBehavior(),
       PlayerCollisionBehavior(),
@@ -44,12 +46,11 @@ class PlayerComponent extends JumperCharacter
   double timeHoldingJump = 0;
   bool didEnemyBop = false;
 
-  bool hasReachedCheckpoint = false;
-
   final JetpackComponent jetpack = JetpackComponent();
 
   bool gotHit = false;
   bool reachedCheckpoint = false;
+  bool completedLevel = false;
 
   static const int maxHealth = 10;
   static const double maxEnergy = 10;

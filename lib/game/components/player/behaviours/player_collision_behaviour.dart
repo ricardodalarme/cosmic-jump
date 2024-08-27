@@ -22,7 +22,7 @@ class PlayerCollisionBehavior extends PhysicalBehavior<PlayerComponent> {
     for (final other in collisionInfo.allCollisions) {
       switch (other) {
         case CheckpointComponent():
-          parent.hasReachedCheckpoint = true;
+          parent.reachedCheckpoint = true;
         case MeteorComponent():
           parent.health = 0;
           other.explode();

@@ -8,12 +8,13 @@ class PlayerCheckpointBehavior extends PhysicalBehavior<PlayerComponent>
     with HasGameRef<CosmicJump> {
   @override
   Future<void> update(double dt) async {
-    if (!parent.hasReachedCheckpoint) {
+    if (!parent.reachedCheckpoint || parent.completedLevel) {
       return;
     }
 
     await SoundController.instance.play('disappear.wav');
 
     parent.reachedCheckpoint = false;
+    game.completeLevel();
   }
 }

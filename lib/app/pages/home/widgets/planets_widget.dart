@@ -7,6 +7,7 @@ import 'package:cosmic_jump/app/pages/home/widgets/circle_indicator.dart';
 import 'package:cosmic_jump/app/pages/home/widgets/planet_item.dart';
 import 'package:cosmic_jump/app/widgets/button.dart';
 import 'package:cosmic_jump/constants/colors.dart';
+import 'package:cosmic_jump/data/account.dart';
 import 'package:cosmic_jump/data/planets.dart';
 import 'package:cosmic_jump/models/planet_model.dart';
 import 'package:flutter/material.dart';
@@ -95,6 +96,7 @@ class _PlanetsWidgetState extends State<PlanetsWidget> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
+    final planet = planets[index];
 
     return GestureDetector(
       onTapUp: (details) {
@@ -114,7 +116,7 @@ class _PlanetsWidgetState extends State<PlanetsWidget> {
             length: planets.length,
           ),
           PlanetName(
-            planet: planets[currentIndex],
+            planet: planet,
             angle: angle,
           ),
           PlanetDisplay(
@@ -132,13 +134,17 @@ class _PlanetsWidgetState extends State<PlanetsWidget> {
             right: 0,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: Button(
-                onPressed: () => Navigator.push(
-                  context,
-                  GamePage.route(planets[index]),
+              child: AnimatedOpacity(
+                duration: const Duration(milliseconds: 250),
+                opacity: planet.isPlayable ? 1 : 0,
+                child: Button(
+                  onPressed: () => Navigator.push(
+                    context,
+                    GamePage.route(planets[index]),
+                  ),
+                  text: 'Jogar',
+                  isEnabled: account.unlockedPlanets.contains(planet.id),
                 ),
-                text: 'Jogar',
-                isEnabled: planets[index].isPlayable,
               ),
             ),
           ),

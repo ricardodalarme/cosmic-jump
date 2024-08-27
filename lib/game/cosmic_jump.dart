@@ -1,4 +1,6 @@
 import 'package:cosmic_jump/constants/screen_size.dart';
+import 'package:cosmic_jump/data/account.dart';
+import 'package:cosmic_jump/data/planets.dart';
 import 'package:cosmic_jump/game/components/block/block_component.dart';
 import 'package:cosmic_jump/game/components/checkpoint/checkpoint_component.dart';
 import 'package:cosmic_jump/game/components/coin/coin_component.dart';
@@ -11,6 +13,7 @@ import 'package:cosmic_jump/game/components/platforms/falling_platform_component
 import 'package:cosmic_jump/game/components/platforms/moving_platform_component.dart';
 import 'package:cosmic_jump/game/components/player/player_component.dart';
 import 'package:cosmic_jump/game/components/traps/spike_component.dart';
+import 'package:cosmic_jump/main.dart';
 import 'package:cosmic_jump/models/planet_model.dart';
 import 'package:flame/camera.dart';
 import 'package:flame/events.dart';
@@ -98,6 +101,27 @@ class CosmicJump extends LeapGame
     _spawnPlayer();
     _spawnMap();
     _spawnAfterDialogue();
+  }
+
+  void completeLevel() {
+    navigatorKey.currentState?.pop();
+
+    final nextLevel = _getNextLevel();
+    if (nextLevel == null) {
+      return;
+    }
+    account.unlockedPlanets.add(nextLevel);
+  }
+
+  String? _getNextLevel() {
+    final index = planets.indexOf(planet);
+
+    for (int i = index + 1; i < planets.length; i++) {
+      if (planets[i].isPlayable) {
+        return planets[i].id;
+      }
+    }
+    return null;
   }
 
   void _spawnMap() {
