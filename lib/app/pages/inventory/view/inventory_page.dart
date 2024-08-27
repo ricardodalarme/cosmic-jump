@@ -1,4 +1,4 @@
-import 'package:cosmic_jump/app/theme/colors.dart';
+import 'package:cosmic_jump/constants/colors.dart';
 import 'package:cosmic_jump/data/items.dart';
 import 'package:cosmic_jump/game/components/inventory/hud/inventory_hud.dart';
 import 'package:cosmic_jump/models/inventory_manager.dart';

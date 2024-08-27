@@ -1,5 +1,5 @@
 import 'package:cosmic_jump/app/pages/details/widgets/description_tile.dart';
-import 'package:cosmic_jump/app/theme/colors.dart';
+import 'package:cosmic_jump/constants/colors.dart';
 import 'package:cosmic_jump/models/planet_model.dart';
 import 'package:flutter/widgets.dart';
 

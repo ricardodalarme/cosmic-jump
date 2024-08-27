@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:cosmic_jump/app/pages/splash/view/splash_page.dart';
-import 'package:cosmic_jump/utils/screen_size.dart';
+import 'package:cosmic_jump/constants/screen_size.dart';
 import 'package:flame/flame.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';

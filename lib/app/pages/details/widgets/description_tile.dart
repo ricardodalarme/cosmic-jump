@@ -1,4 +1,4 @@
-import 'package:cosmic_jump/app/theme/colors.dart';
+import 'package:cosmic_jump/constants/colors.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 

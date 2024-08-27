@@ -1,7 +1,7 @@
 import 'package:cosmic_jump/app/pages/inventory/view/inventory_page.dart';
 import 'package:cosmic_jump/app/pages/planets/view/planets_page.dart';
-import 'package:cosmic_jump/app/theme/colors.dart';
 import 'package:cosmic_jump/app/widgets/toggle_button.dart';
+import 'package:cosmic_jump/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
