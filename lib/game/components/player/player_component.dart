@@ -38,12 +38,10 @@ class PlayerComponent extends JumperCharacter
   }
 
   String character = 'Virtual Guy';
-  int initialHealth = 1;
-
   late final Vector2 _spawn;
 
+
   int coins = 0;
-  double deadTime = 0;
   double timeHoldingJump = 0;
   bool didEnemyBop = false;
 
@@ -84,9 +82,11 @@ class PlayerComponent extends JumperCharacter
 
     walkSpeed = leapMap.tileSize * 7;
     minJumpImpulse = leapWorld.gravity * 0.6;
+
+    respawn();
   }
 
-  void reespawn() {
+  void respawn() {
     x = _spawn.x;
     y = _spawn.y;
     velocity.x = 0;
