@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'dart:ui';
 
+import 'package:cosmic_jump/game/components/meteor/behaviours/meteor_collision_behaviour.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/particles.dart';
@@ -24,8 +25,17 @@ class MeteorComponent extends PhysicalEntity with CollisionCallbacks {
   Vector2 velocity = Vector2.zero();
 
   MeteorComponent() {
+    addAll(
+      [
+        CollisionDetectionBehavior(),
+        MeteorCollisionBehavior(),
+      ],
+    );
+
     size = _hitbox;
     _initializeRandomMovement();
+
+    solidTags.addAll([CommonTags.ground]);
   }
 
   void _initializeRandomMovement() {

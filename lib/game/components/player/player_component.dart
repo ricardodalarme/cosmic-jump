@@ -7,13 +7,12 @@ import 'package:cosmic_jump/game/components/player/behaviours/player_input_behav
 import 'package:cosmic_jump/game/components/player/mixins/has_jetpack.dart';
 import 'package:cosmic_jump/game/components/player/player_animation.dart';
 import 'package:cosmic_jump/game/components/player/player_state.dart';
-import 'package:cosmic_jump/game/cosmic_jump.dart';
 import 'package:cosmic_jump/models/item_model.dart';
 import 'package:flame/components.dart';
 import 'package:leap/leap.dart';
 
 class PlayerComponent extends JumperCharacter
-    with HasGameRef<CosmicJump>, HasHealth, HasJetpack, HasAnimationGroup {
+    with HasJetpack, HasAnimationGroup {
   PlayerComponent({
     this.character = 'Virtual Guy',
   }) {
