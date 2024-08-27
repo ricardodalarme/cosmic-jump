@@ -6,8 +6,7 @@ import 'package:flame/components.dart';
 import 'package:flame/particles.dart';
 import 'package:leap/leap.dart';
 
-class MeteorComponent extends PhysicalEntity
-    with HasGameRef, CollisionCallbacks {
+class MeteorComponent extends PhysicalEntity with CollisionCallbacks {
   final double fallSpeed = 200;
   static const double _stepTime = 0.05;
 
@@ -27,7 +26,7 @@ class MeteorComponent extends PhysicalEntity
     super.onLoad();
 
     animation = SpriteAnimation.fromFrameData(
-      game.images.fromCache('Asteroids/Asteroid.png'),
+      leapGame.images.fromCache('Asteroids/Asteroid.png'),
       SpriteAnimationData.sequenced(
         amount: 3,
         stepTime: _stepTime,
@@ -60,7 +59,7 @@ class MeteorComponent extends PhysicalEntity
       position.y += fallSpeed * dt;
       position.x -= 50 * dt;
     }
-    if (position.y > gameRef.size.y) {
+    if (position.y > leapMap.size.y) {
       removeFromParent();
     }
   }
@@ -104,7 +103,7 @@ class MeteorComponent extends PhysicalEntity
       ),
     );
 
-    game.world.add(particleComponent);
+    leapWorld.add(particleComponent);
 
     removeFromParent();
   }
