@@ -14,7 +14,9 @@ import 'package:leap/leap.dart';
 
 class PlayerComponent extends JumperCharacter
     with HasGameRef<CosmicJump>, HasHealth, HasJetpack, HasAnimationGroup {
-  PlayerComponent() {
+  PlayerComponent({
+    this.character = 'Virtual Guy',
+  }) {
     // Behaviors, ordering is important for processing
     // collision detection and reacting to inputs
     //
@@ -37,9 +39,10 @@ class PlayerComponent extends JumperCharacter
     solidTags.addAll([CommonTags.ground, 'Block']);
   }
 
-  String character = 'Virtual Guy';
+  final String character;
   late final Vector2 _spawn;
 
+  static final Vector2 _hitbox = Vector2(28, 34);
 
   int coins = 0;
   double timeHoldingJump = 0;
@@ -73,13 +76,7 @@ class PlayerComponent extends JumperCharacter
     }
 
     _spawn = leapMap.playerSpawn;
-
-    // Size controls player hitbox, which should be slightly smaller than
-    // visual size of the sprite.
-    size = Vector2(20, 28);
-
-    reespawn();
-
+    size = _hitbox;
     walkSpeed = leapMap.tileSize * 7;
     minJumpImpulse = leapWorld.gravity * 0.6;
 

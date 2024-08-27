@@ -7,24 +7,24 @@ import 'package:flame/particles.dart';
 import 'package:leap/leap.dart';
 
 class MeteorComponent extends PhysicalEntity with CollisionCallbacks {
-  final double baseFallSpeed = 200;
-  final double baseHorizontalSpeed = 50;
+  final double baseFallSpeed = 220;
+  final double baseHorizontalSpeed = 60;
   static const double _stepTime = 0.05;
-
-  late final SpriteAnimation animation;
-  late final SpriteAnimationComponent spriteComponent;
 
   double fixedDeltaTime = 1 / 60;
   double accumulatedTime = 0;
 
   bool isExploding = false;
 
+  static final Vector2 _textureSize = Vector2(32, 56);
+  static final Vector2 _hitbox = Vector2(28, 56);
+
   @override
   // ignore: overridden_fields
   Vector2 velocity = Vector2.zero();
 
   MeteorComponent() {
-    size = Vector2.all(38);
+    size = _hitbox;
     _initializeRandomMovement();
   }
 
@@ -47,24 +47,19 @@ class MeteorComponent extends PhysicalEntity with CollisionCallbacks {
   Future<void> onLoad() async {
     super.onLoad();
 
-    animation = SpriteAnimation.fromFrameData(
+    final animation = SpriteAnimation.fromFrameData(
       leapGame.images.fromCache('Asteroids/Asteroid.png'),
       SpriteAnimationData.sequenced(
         amount: 4,
         stepTime: _stepTime,
-        textureSize: Vector2(32, 56),
+        textureSize: _textureSize,
       ),
     );
 
-    spriteComponent = SpriteAnimationComponent(
-      animation: animation,
-      size: Vector2(32, 56),
-      anchor: Anchor.center, // Set anchor to center for proper rotation
-    );
-
-    _updateSpriteAngle(); // Set initial angle
-
+    final spriteComponent = SpriteAnimationComponent(animation: animation);
     add(spriteComponent);
+
+    _updateAngle();
   }
 
   @override
@@ -82,7 +77,7 @@ class MeteorComponent extends PhysicalEntity with CollisionCallbacks {
 
     if (!isExploding) {
       position += velocity * dt;
-      _updateSpriteAngle(); // Update the sprite angle dynamically based on current velocity
+      _updateAngle(); // Update the sprite angle dynamically based on current velocity
     }
 
     if (position.y > leapMap.size.y ||
@@ -92,7 +87,7 @@ class MeteorComponent extends PhysicalEntity with CollisionCallbacks {
     }
   }
 
-  void _updateSpriteAngle() {
+  void _updateAngle() {
     // Calculate the angle in radians based on the velocity vector
     double angle = velocity.angleTo(Vector2(0, 1));
 
@@ -102,7 +97,7 @@ class MeteorComponent extends PhysicalEntity with CollisionCallbacks {
     }
 
     // Rotate the sprite component to match the movement angle
-    spriteComponent.angle = angle;
+    this.angle = angle;
   }
 
   @override
