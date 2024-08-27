@@ -10,6 +10,7 @@ import 'package:cosmic_jump/game/components/meteor/meteor_manager.dart';
 import 'package:cosmic_jump/game/components/platforms/falling_platform_component.dart';
 import 'package:cosmic_jump/game/components/platforms/moving_platform_component.dart';
 import 'package:cosmic_jump/game/components/player/player_component.dart';
+import 'package:cosmic_jump/game/components/traps/spike_component.dart';
 import 'package:cosmic_jump/models/planet_model.dart';
 import 'package:flame/camera.dart';
 import 'package:flame/events.dart';
@@ -42,6 +43,7 @@ class CosmicJump extends LeapGame
       'Block': BlockFactory(),
       'MovingPlatform': MovingPlatformFactory(),
       'FallingPlatform': FallingPlatformFactory(),
+      'Trap': TrapFactory(),
     };
 
     return loadWorldAndMap(

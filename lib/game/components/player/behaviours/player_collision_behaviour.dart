@@ -3,6 +3,7 @@ import 'package:cosmic_jump/game/components/coin/coin_component.dart';
 import 'package:cosmic_jump/game/components/meteor/meteor_component.dart';
 import 'package:cosmic_jump/game/components/platforms/falling_platform_component.dart';
 import 'package:cosmic_jump/game/components/player/player_component.dart';
+import 'package:cosmic_jump/game/components/traps/spike_component.dart';
 import 'package:leap/leap.dart';
 
 class PlayerCollisionBehavior extends PhysicalBehavior<PlayerComponent> {
@@ -29,6 +30,8 @@ class PlayerCollisionBehavior extends PhysicalBehavior<PlayerComponent> {
           parent.coins++;
         case FallingPlatformComponent():
           if (collisionInfo.down) other.startFalling();
+        case SpikeEntity():
+          if (collisionInfo.down) parent.health = 0;
       }
     }
   }
