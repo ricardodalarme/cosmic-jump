@@ -6,6 +6,7 @@ import 'package:cosmic_jump/game/components/hud/back_button.dart';
 import 'package:cosmic_jump/game/components/hud/main_hud.dart';
 import 'package:cosmic_jump/game/components/light/light_component.dart';
 import 'package:cosmic_jump/game/components/meteor/meteor_manager.dart';
+import 'package:cosmic_jump/game/components/platforms/falling_platform_component.dart';
 import 'package:cosmic_jump/game/components/platforms/moving_platform_component.dart';
 import 'package:cosmic_jump/game/components/player/player_component.dart';
 import 'package:cosmic_jump/models/planet_model.dart';
@@ -40,6 +41,7 @@ class CosmicJump extends LeapGame
       'Checkpoint': CheckpointFactory(),
       'Block': BlockFactory(),
       'MovingPlatform': MovingPlatformFactory(),
+      'FallingPlatform': FallingPlatformFactory(),
     };
 
     return loadWorldAndMap(
