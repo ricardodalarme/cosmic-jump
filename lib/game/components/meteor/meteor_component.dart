@@ -18,13 +18,18 @@ class MeteorComponent extends PhysicalEntity with CollisionCallbacks {
   bool isExploding = false;
 
   static final Vector2 _textureSize = Vector2(32, 56);
-  static final Vector2 _hitbox = Vector2(28, 56);
+  static final Vector2 _hitbox = Vector2(28, 54);
 
   @override
   // ignore: overridden_fields
   Vector2 velocity = Vector2.zero();
 
   MeteorComponent() {
+    isSolidFromTop = false;
+    isSolidFromLeft = false;
+    isSolidFromRight = false;
+    isSolidFromBottom = false;
+
     addAll(
       [
         CollisionDetectionBehavior(),

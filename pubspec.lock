@@ -291,10 +291,11 @@ packages:
   leap:
     dependency: "direct main"
     description:
-      name: leap
-      sha256: "12bd92d3d824c953b542d7117bb56f6ddfc6d52ec2d426b4eba17583472ddd42"
-      url: "https://pub.dev"
-    source: hosted
+      path: "packages/leap"
+      ref: "8bbe7b856a908f9906cfb27c849aa146e044b47f"
+      resolved-ref: "8bbe7b856a908f9906cfb27c849aa146e044b47f"
+      url: "https://github.com/ricardodalarme/leap"
+    source: git
     version: "0.8.0"
   matcher:
     dependency: transitive
