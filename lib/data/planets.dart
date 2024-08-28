@@ -63,7 +63,7 @@ const List<PlanetModel> planets = [
     temperature: -65,
     distancefromEarth: 78340000,
     gravity: 3.71,
-    visibility: 0.2,
+    visibility: 0.075,
   ),
   PlanetModel(
     id: 'Jupiter',
