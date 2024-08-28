@@ -1,10 +1,8 @@
-import 'package:cosmic_jump/app/pages/inventory/view/inventory_page.dart';
-import 'package:cosmic_jump/app/pages/planets/view/planets_page.dart';
-import 'package:cosmic_jump/app/widgets/toggle_button.dart';
+import 'package:cosmic_jump/app/pages/home/widgets/planets_widget.dart';
 import 'package:cosmic_jump/constants/colors.dart';
 import 'package:flutter/material.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   static Route<void> route() {
@@ -14,36 +12,10 @@ class HomePage extends StatefulWidget {
   }
 
   @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  int _currentPage = 0;
-
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       backgroundColor: darkBlue,
-      body: Column(
-        children: [
-          SafeArea(
-            child: AnimatedToggle(
-              currentIndex: _currentPage,
-              values: const ['Planetas', 'Inventário'],
-              onChanged: (index) => setState(() => _currentPage = index!),
-            ),
-          ),
-          Expanded(
-            child: IndexedStack(
-              index: _currentPage,
-              children: const [
-                PlanetsPage(),
-                InventoryPage(),
-              ],
-            ),
-          ),
-        ],
-      ),
+      body: SafeArea(child: PlanetsWidget()),
     );
   }
 }

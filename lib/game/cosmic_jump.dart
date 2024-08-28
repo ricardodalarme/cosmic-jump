@@ -104,14 +104,10 @@ class CosmicJump extends LeapGame
   }
 
   void _spawnMap() {
-    double radius = 40;
+    const double radius = 40;
 
     if (planet.fog != null) {
       world.add(FogComponent(planet.fog!));
-    }
-
-    if (player.hasNightVision) {
-      radius = 100;
     }
 
     final lightSources = [

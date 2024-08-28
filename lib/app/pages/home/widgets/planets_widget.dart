@@ -3,22 +3,22 @@ import 'dart:math';
 
 import 'package:cosmic_jump/app/pages/details/view/details_page.dart';
 import 'package:cosmic_jump/app/pages/game/view/game_page.dart';
-import 'package:cosmic_jump/app/pages/planets/widgets/circle_indicator.dart';
-import 'package:cosmic_jump/app/pages/planets/widgets/planet_item.dart';
+import 'package:cosmic_jump/app/pages/home/widgets/circle_indicator.dart';
+import 'package:cosmic_jump/app/pages/home/widgets/planet_item.dart';
 import 'package:cosmic_jump/app/widgets/button.dart';
 import 'package:cosmic_jump/constants/colors.dart';
 import 'package:cosmic_jump/data/planets.dart';
 import 'package:cosmic_jump/models/planet_model.dart';
 import 'package:flutter/material.dart';
 
-class PlanetsPage extends StatefulWidget {
-  const PlanetsPage({super.key});
+class PlanetsWidget extends StatefulWidget {
+  const PlanetsWidget({super.key});
 
   @override
-  State<PlanetsPage> createState() => _HomePageState();
+  State<PlanetsWidget> createState() => _PlanetsWidgetState();
 }
 
-class _HomePageState extends State<PlanetsPage> {
+class _PlanetsWidgetState extends State<PlanetsWidget> {
   int currentIndex = 0;
   int angle = 0;
   int planet1 = 0;
@@ -94,7 +94,7 @@ class _HomePageState extends State<PlanetsPage> {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
+    final size = MediaQuery.sizeOf(context);
 
     return GestureDetector(
       onTapUp: (details) {
@@ -127,7 +127,7 @@ class _HomePageState extends State<PlanetsPage> {
           ),
           // play button
           Positioned(
-            bottom: 40,
+            bottom: 20,
             left: 0,
             right: 0,
             child: Padding(

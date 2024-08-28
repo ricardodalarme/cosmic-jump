@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:cosmic_jump/game/components/hud/character_preview_hud.dart';
-import 'package:cosmic_jump/game/components/hud/equipments_hud.dart';
 import 'package:cosmic_jump/game/components/hud/health_hud.dart';
 import 'package:cosmic_jump/game/components/hud/jetpack_energy_hud.dart';
 import 'package:cosmic_jump/game/cosmic_jump.dart';
@@ -22,7 +21,6 @@ class MainHud extends SpriteComponent
       HealthHud(),
       JetpackEnergyHud(game.player.jetpack),
       CharacterPreviewHud(),
-      EquipmentsHud(),
     ]);
     super.onLoad();
   }

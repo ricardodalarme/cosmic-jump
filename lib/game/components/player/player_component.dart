@@ -1,4 +1,3 @@
-import 'package:cosmic_jump/data/account.dart';
 import 'package:cosmic_jump/game/components/jetpack/jetpack_component.dart';
 import 'package:cosmic_jump/game/components/player/behaviours/player_collision_behaviour.dart';
 import 'package:cosmic_jump/game/components/player/behaviours/player_damage_behaviour.dart';
@@ -7,7 +6,6 @@ import 'package:cosmic_jump/game/components/player/behaviours/player_input_behav
 import 'package:cosmic_jump/game/components/player/mixins/has_jetpack.dart';
 import 'package:cosmic_jump/game/components/player/player_animation.dart';
 import 'package:cosmic_jump/game/components/player/player_state.dart';
-import 'package:cosmic_jump/models/item_model.dart';
 import 'package:flame/components.dart';
 import 'package:leap/leap.dart';
 
@@ -90,13 +88,4 @@ class PlayerComponent extends JumperCharacter
     health = maxHealth;
     energy = maxEnergy;
   }
-
-  bool get hasNightVision => account.equipments.equippedItems
-      .whereType<VisibilityItemModel>()
-      .isNotEmpty;
-
-  double get poisonResistance => account.equipments.equippedItems.fold(
-        0,
-        (prev, item) => prev + (item?.poisonResistance ?? 0),
-      );
 }
