@@ -20,7 +20,7 @@ class MainHud extends SpriteComponent
 
     addAll([
       HealthHud(),
-      if (game.player.jetpack != null) JetpackEnergyHud(game.player.jetpack!),
+      JetpackEnergyHud(game.player.jetpack),
       CharacterPreviewHud(),
       EquipmentsHud(),
     ]);

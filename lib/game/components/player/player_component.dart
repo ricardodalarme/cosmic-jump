@@ -49,7 +49,7 @@ class PlayerComponent extends JumperCharacter
 
   bool hasReachedCheckpoint = false;
 
-  JetpackComponent? jetpack;
+  final JetpackComponent jetpack = JetpackComponent();
 
   bool gotHit = false;
   bool reachedCheckpoint = false;
@@ -69,10 +69,7 @@ class PlayerComponent extends JumperCharacter
   Future<void> onLoad() async {
     super.onLoad();
 
-    if (hasJetpack) {
-      jetpack = JetpackComponent();
-      add(jetpack!);
-    }
+    add(jetpack);
 
     _spawn = leapMap.playerSpawn;
     size = _hitbox;
