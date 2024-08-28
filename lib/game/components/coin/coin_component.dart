@@ -1,5 +1,5 @@
+import 'package:cosmic_jump/game/audio/sound_controller.dart';
 import 'package:flame/components.dart';
-import 'package:flame_audio/flame_audio.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 import 'package:leap/leap.dart';
 
@@ -38,12 +38,12 @@ class CoinComponent extends PhysicalEntity with HasGameRef {
 
   void collect() {
     removeFromParent();
-    FlameAudio.play('collect_item.wav');
+    SoundController.instance.play('collect_item.wav');
   }
 }
 
 class CoinFactory implements TiledObjectHandler {
-  const  CoinFactory();
+  const CoinFactory();
 
   @override
   void handleObject(TiledObject object, Layer layer, LeapMap map) {

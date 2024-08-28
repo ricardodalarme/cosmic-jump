@@ -1,8 +1,7 @@
-import 'package:cosmic_jump/data/settings.dart';
+import 'package:cosmic_jump/game/audio/sound_controller.dart';
 import 'package:cosmic_jump/game/components/player/player_component.dart';
 import 'package:cosmic_jump/game/cosmic_jump.dart';
 import 'package:flame/components.dart';
-import 'package:flame_audio/flame_audio.dart';
 import 'package:leap/leap.dart';
 
 class PlayerCheckpointBehavior extends PhysicalBehavior<PlayerComponent>
@@ -13,9 +12,7 @@ class PlayerCheckpointBehavior extends PhysicalBehavior<PlayerComponent>
       return;
     }
 
-    if (settings.playSounds) {
-      await FlameAudio.play('disappear.wav', volume: settings.soundVolume);
-    }
+    await SoundController.instance.play('disappear.wav');
 
     parent.reachedCheckpoint = false;
   }

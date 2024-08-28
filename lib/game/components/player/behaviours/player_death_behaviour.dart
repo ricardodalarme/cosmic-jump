@@ -15,7 +15,7 @@ class PlayerDeathBehavior extends PhysicalBehavior<PlayerComponent> {
 
     if (parent.wasAlive && !parent.isAlive) {
       parent.position.y += 32;
-      // FlameAudio.play('die.wav');
+      // SoundController.instance.play('die.wav');
     }
   }
 }
