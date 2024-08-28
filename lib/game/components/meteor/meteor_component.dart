@@ -131,6 +131,12 @@ class MeteorComponent extends PhysicalEntity with CollisionCallbacks {
   Future<void> explode() async {
     isExploding = true;
 
+    final Vector2 bottomCenter = Vector2(_hitbox.x / 2, _hitbox.y);
+    final Vector2 rotatedBottomCenter = bottomCenter.clone()
+      ..rotate(angle)
+      ..add(position);
+
+    // Create the particle component at the calculated position
     final particleComponent = ParticleSystemComponent(
       particle: Particle.generate(
         count: 50,
@@ -138,7 +144,6 @@ class MeteorComponent extends PhysicalEntity with CollisionCallbacks {
         generator: (i) => AcceleratedParticle(
           acceleration: getRandomVector() * 0.5,
           speed: getRandomVector() * 2,
-          position: position.clone(),
           child: CircleParticle(
             radius: _random.nextDouble() * 1.5,
             paint: Paint()
@@ -150,6 +155,7 @@ class MeteorComponent extends PhysicalEntity with CollisionCallbacks {
           ),
         ),
       ),
+      position: rotatedBottomCenter,
     );
 
     leapWorld.add(particleComponent);
