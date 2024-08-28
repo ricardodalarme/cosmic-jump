@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flame/components.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 import 'package:leap/leap.dart';
@@ -14,40 +16,60 @@ class FallingPlatformComponent extends PhysicalEntity {
 
   final StringProperty spriteName;
 
-  static const double _stepTime = 0.5;
+  static final Vector2 _textureSize = Vector2(48, 9);
   static const double initialFallSpeed = 100;
-  static const double fallAcceleration = 25; // Fator de aceleração
+  static const double fallAcceleration = 50;
+  static const int fallAfterInMs = 800;
+  static const double _shakeDuration = 0.8;
+  static const double _shakeIntensity = 2;
+
+  late final SpriteComponent spriteComponent;
+
   double fallSpeed = initialFallSpeed;
   bool _falling = false;
   double fallingTime = 0;
-  late SpriteAnimationComponent animationComponent;
+
+  Vector2 _originalPosition = Vector2.zero();
+  bool _shaking = false;
+  double _shakeTime = 0;
+
+  final Random _random = Random();
 
   @override
   void onLoad() {
     super.onLoad();
 
-    size = Vector2.all(32);
-    final animation = SpriteAnimation.fromFrameData(
-      leapGame.images.fromCache('Platforms/${spriteName.value}.png'),
-      SpriteAnimationData.sequenced(
-        amount: 8,
-        stepTime: _stepTime,
-        textureSize: Vector2(32, 8),
-        loop: false,
+    size = _textureSize;
+    _originalPosition = position.clone();
+
+    spriteComponent = SpriteComponent(
+      sprite: Sprite(
+        leapGame.images.fromCache('Platforms/Falling.png'),
       ),
-    );
-
-    animationComponent = SpriteAnimationComponent(
-      animation: animation,
       size: size,
-      playing: false,
     );
 
-    add(animationComponent);
+    add(spriteComponent);
   }
 
   @override
   void updateAfter(double dt) {
+    super.updateAfter(dt);
+
+    if (_shaking) {
+      _shakeTime += dt;
+      if (_shakeTime >= _shakeDuration) {
+        _shaking = false;
+        _shakeTime = 0;
+        position = _originalPosition;
+      } else {
+        final double shakeOffsetX =
+            (_shakeIntensity * (1 - _shakeTime / _shakeDuration)) *
+                (_random.nextBool() ? 1 : -1);
+        position.x = _originalPosition.x + shakeOffsetX;
+      }
+    }
+
     if (_falling) {
       fallingTime += dt * 10;
 
@@ -59,25 +81,23 @@ class FallingPlatformComponent extends PhysicalEntity {
         removeFromParent();
       }
 
-      // Update the position of anything on top of this platform. Ideally
-      // this happens before the other entity's collision logic
+      // Update the position of anything on top of this platform
       leapWorld.physicals
           .where((other) => other.collisionInfo.downCollision == this)
           .forEach((element) {
         element.y += fallSpeed * dt;
       });
     }
-
-    super.updateAfter(dt);
   }
 
   void startFalling() {
-    animationComponent.animationTicker?.onComplete = () {
-      _falling = true;
-    };
-    if (!animationComponent.playing) {
-      animationComponent.animationTicker?.reset();
-      animationComponent.playing = true;
+    if (!_falling) {
+      _shaking = true;
+
+      Future.delayed(const Duration(milliseconds: fallAfterInMs), () {
+        _falling = true;
+        _shaking = false;
+      });
     }
   }
 }

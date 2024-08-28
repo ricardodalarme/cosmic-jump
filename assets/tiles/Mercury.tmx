@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="22" height="60" tilewidth="16" tileheight="16" infinite="0" nextlayerid="14" nextobjectid="102">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="22" height="60" tilewidth="16" tileheight="16" infinite="0" nextlayerid="14" nextobjectid="102">
  <tileset firstgid="1" name="Pixel Adventure" tilewidth="16" tileheight="16" tilecount="242" columns="22">
   <image source="../images/Terrain/Terrain (16x16).png" width="352" height="176"/>
   <tile id="39">
@@ -136,10 +136,10 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,7273,7274,7275,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,7273,7274,7275,0,0,0,0,7234,7235,7236,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7273,7274,7275,0,0,0,0,
+0,0,0,0,0,0,7234,7235,7236,0,0,0,0,0,0,7273,7274,7275,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -173,7 +173,7 @@
    </properties>
   </object>
   <object id="95" x="124.667" y="318"/>
-  <object id="96" type="FallingPlatform" x="192" y="816" width="32" height="8">
+  <object id="96" type="FallingPlatform" x="256" y="640" width="32" height="8">
    <properties>
     <property name="LoopMode" value="reverseAndLoop"/>
     <property name="MoveSpeedX" type="float" value="5"/>
