@@ -2,66 +2,71 @@ import 'dart:math';
 import 'dart:ui';
 
 import 'package:cosmic_jump/game/components/meteor/behaviours/meteor_collision_behaviour.dart';
-import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/particles.dart';
 import 'package:leap/leap.dart';
 
-class MeteorComponent extends PhysicalEntity with CollisionCallbacks {
-  final double baseFallSpeed = 220;
-  final double baseHorizontalSpeed = 60;
+class MeteorComponent extends PhysicalEntity {
+  static final Vector2 _textureSize = Vector2(32, 56);
+  static final Vector2 _hitbox = Vector2(28, 54);
   static const double _stepTime = 0.05;
-
-  double fixedDeltaTime = 1 / 60;
-  double accumulatedTime = 0;
+  static const double _baseFallSpeed = 220;
+  static const double _baseHorizontalSpeed = 60;
+  static final _random = Random();
 
   bool isExploding = false;
 
-  static final Vector2 _textureSize = Vector2(32, 56);
-  static final Vector2 _hitbox = Vector2(28, 54);
+  MeteorComponent() {
+    _setupSolidProperties();
+    _initializeRandomMovement();
+    size = _hitbox;
+  }
 
   @override
-  // ignore: overridden_fields
-  Vector2 velocity = Vector2.zero();
+  void onLoad() {
+    super.onLoad();
+    _setupSpriteAnimation();
+    _setupBehaviors();
+    _updateAngle();
+  }
 
-  MeteorComponent() {
+  @override
+  void update(double dt) {
+    super.update(dt);
+    if (!isExploding) {
+      _updatePosition(dt);
+      _updateAngle();
+    }
+    _checkBoundsAndRemoveIfNecessary();
+  }
+
+  void explode() {
+    isExploding = true;
+    _createExplosionParticles();
+    removeFromParent();
+  }
+
+  void _setupSolidProperties() {
     isSolidFromTop = false;
     isSolidFromLeft = false;
     isSolidFromRight = false;
     isSolidFromBottom = false;
-
-    addAll(
-      [
-        CollisionDetectionBehavior(),
-        MeteorCollisionBehavior(),
-      ],
-    );
-
-    size = _hitbox;
-    _initializeRandomMovement();
-
     solidTags.addAll([CommonTags.ground]);
   }
 
   void _initializeRandomMovement() {
-    // Randomize the fall and horizontal speeds
     final fallSpeedMultiplier =
         _random.nextDouble() * 0.5 + 0.75; // 0.75x to 1.25x
     final horizontalSpeedMultiplier = _random.nextDouble() * 2 - 1; // -1x to 1x
-
-    // Apply random direction to horizontal movement
     final direction = _random.nextBool() ? 1.0 : -1.0;
 
-    velocity = Vector2(
-      direction * baseHorizontalSpeed * horizontalSpeedMultiplier,
-      baseFallSpeed * fallSpeedMultiplier,
+    velocity.xy = Vector2(
+      direction * _baseHorizontalSpeed * horizontalSpeedMultiplier,
+      _baseFallSpeed * fallSpeedMultiplier,
     );
   }
 
-  @override
-  Future<void> onLoad() async {
-    super.onLoad();
-
+  void _setupSpriteAnimation() {
     final animation = SpriteAnimation.fromFrameData(
       leapGame.images.fromCache('Asteroids/Asteroid.png'),
       SpriteAnimationData.sequenced(
@@ -71,79 +76,48 @@ class MeteorComponent extends PhysicalEntity with CollisionCallbacks {
       ),
     );
 
-    final spriteComponent = SpriteAnimationComponent(animation: animation);
-    add(spriteComponent);
-
-    _updateAngle();
+    add(SpriteAnimationComponent(animation: animation));
   }
 
-  @override
-  Future<void> update(double dt) async {
-    super.update(dt);
+  void _setupBehaviors() {
+    addAll([
+      CollisionDetectionBehavior(),
+      MeteorCollisionBehavior(),
+    ]);
+  }
 
-    accumulatedTime += dt;
+  void _updatePosition(double dt) {
+    position += velocity * dt;
+  }
 
-    if (isMounted) {
-      while (accumulatedTime >= fixedDeltaTime) {
-        await _checkVerticalCollisions();
-        accumulatedTime -= fixedDeltaTime;
-      }
+  void _updateAngle() {
+    double angle = velocity.angleTo(Vector2(0, 1));
+    if (velocity.x > 0) {
+      angle = -angle;
     }
+    this.angle = angle;
+  }
 
-    if (!isExploding) {
-      position += velocity * dt;
-      _updateAngle(); // Update the sprite angle dynamically based on current velocity
-    }
-
-    if (position.y > leapMap.size.y ||
-        position.x < 0 ||
-        position.x > leapMap.size.x) {
+  void _checkBoundsAndRemoveIfNecessary() {
+    final mapBounds = Rect.fromLTWH(0, 0, leapMap.size.x, leapMap.size.y);
+    if (!mapBounds.overlaps(toRect())) {
       removeFromParent();
     }
   }
 
-  void _updateAngle() {
-    // Calculate the angle in radians based on the velocity vector
-    double angle = velocity.angleTo(Vector2(0, 1));
-
-    // Ensure the sprite is correctly oriented for left-to-right movement
-    if (velocity.x > 0) {
-      angle = -angle; // Flip the angle for left-to-right movement
-    }
-
-    // Rotate the sprite component to match the movement angle
-    this.angle = angle;
-  }
-
-  @override
-  Future<void> onCollisionStart(
-    Set<Vector2> intersectionPoints,
-    PositionComponent other,
-  ) async {
-    await _checkVerticalCollisions();
-    super.onCollisionStart(intersectionPoints, other);
-  }
-
-  Future<void> _checkVerticalCollisions() async {
-    // Collision logic can be implemented here if needed
-  }
-
-  Future<void> explode() async {
-    isExploding = true;
-
-    final Vector2 bottomCenter = Vector2(_hitbox.x / 2, _hitbox.y);
-    final Vector2 rotatedBottomCenter = bottomCenter.clone()
+  void _createExplosionParticles() {
+    final bottomCenter = Vector2(_hitbox.x / 2, _hitbox.y);
+    final rotatedBottomCenter = bottomCenter.clone()
       ..rotate(angle)
       ..add(position);
 
-    // Create the particle component at the calculated position
     final particleComponent = ParticleSystemComponent(
       particle: Particle.generate(
         count: 50,
         lifespan: 0.35,
         generator: (i) => AcceleratedParticle(
-          acceleration: getRandomVector() * 0.5,
-          speed: getRandomVector() * 2,
+          acceleration: _getRandomVector() * 0.5,
+          speed: _getRandomVector() * 2,
           child: CircleParticle(
             radius: _random.nextDouble() * 1.5,
             paint: Paint()
@@ -159,13 +133,9 @@ class MeteorComponent extends PhysicalEntity with CollisionCallbacks {
     );
 
     leapWorld.add(particleComponent);
-
-    removeFromParent();
   }
-}
 
-final _random = Random();
-
-Vector2 getRandomVector() {
-  return (Vector2.random(_random) - Vector2.random(_random)) * 300;
+  static Vector2 _getRandomVector() {
+    return (Vector2.random(_random) - Vector2.random(_random)) * 300;
+  }
 }
