@@ -27,9 +27,6 @@ class CosmicJump extends LeapGame
   final PlayerComponent player = PlayerComponent();
   late final FourButtonInput input;
 
-  bool playSounds = false;
-  double soundVolume = 1;
-
   static const double _tileSize = 16;
 
   Future<void> _loadLevel() async {
