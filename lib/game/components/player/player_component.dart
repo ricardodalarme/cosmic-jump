@@ -41,7 +41,6 @@ class PlayerComponent extends JumperCharacter
 
   static final Vector2 _hitbox = Vector2(28, 34);
 
-  int coins = 0;
   double timeHoldingJump = 0;
   bool didEnemyBop = false;
 
