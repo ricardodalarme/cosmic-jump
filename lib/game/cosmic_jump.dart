@@ -118,7 +118,7 @@ class CosmicJump extends LeapGame
       LightSource(position: Vector2(0, 0), radius: radius),
     ];
     final lightAndDarknessComponent = LightAndDarknessComponent(
-      size: size + Vector2(0, 50),
+      size: world.map.size,
       lightSources: lightSources,
       player: player,
       visibility: planet.visibility,
