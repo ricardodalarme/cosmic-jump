@@ -15,11 +15,7 @@ dependencies:
     sdk: flutter
   flutter_svg: ^2.0.10+1
   jenny: ^1.3.1
-  leap:
-    git:
-      url: https://github.com/ricardodalarme/leap
-      ref: 8bbe7b856a908f9906cfb27c849aa146e044b47f
-      path: packages/leap
+  leap: ^0.8.0
   toggle_switch: ^2.3.0
   window_size:
     git:

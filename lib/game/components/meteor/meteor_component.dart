@@ -51,7 +51,6 @@ class MeteorComponent extends PhysicalEntity {
     isSolidFromLeft = false;
     isSolidFromRight = false;
     isSolidFromBottom = false;
-    solidTags.addAll([CommonTags.ground]);
   }
 
   void _initializeRandomMovement() {
