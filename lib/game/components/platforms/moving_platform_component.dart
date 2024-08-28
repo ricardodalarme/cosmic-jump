@@ -9,19 +9,20 @@ class MovingPlatformComponent extends MovingPlatform with HasGameRef {
 
   final StringProperty spriteName;
 
-  static const double _stepTime = 0.5;
+  static const double _stepTime = 0.05;
+  static final Vector2 _textureSize = Vector2(48, 8);
 
   @override
   void onLoad() {
     super.onLoad();
 
-    size = Vector2.all(32);
+    size = _textureSize;
     final animation = SpriteAnimation.fromFrameData(
       game.images.fromCache('Platforms/${spriteName.value}.png'),
       SpriteAnimationData.sequenced(
         amount: 8,
         stepTime: _stepTime,
-        textureSize: Vector2(32, 8),
+        textureSize: _textureSize,
       ),
     );
 
