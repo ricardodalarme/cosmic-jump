@@ -50,8 +50,7 @@ class DialogueControllerComponent extends Component
   }
 
   void _changeTextAndShowNextButton(DialogueLine line) {
-    final characterName = line.character?.name ?? '';
-    final dialogueLineText = '$characterName: ${line.text}';
+    final dialogueLineText = line.text;
     _dialogueBoxComponent.changeText(dialogueLineText, _goNextLine);
   }
 

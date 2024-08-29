@@ -36,6 +36,7 @@ class CosmicJump extends LeapGame
       downKeys: {PhysicalKeyboardKey.keyX},
     ),
   );
+  final yarnProject = YarnProject();
 
   static const double _tileSize = 16;
 
@@ -186,13 +187,13 @@ class CosmicJump extends LeapGame
     final dialogueControllerComponent = DialogueControllerComponent();
     camera.viewport.add(dialogueControllerComponent);
 
-    final yarnProject = YarnProject();
+    yarnProject.parse(await rootBundle.loadString('assets/yarn/Welcome.yarn'));
     yarnProject
         .parse(await rootBundle.loadString('assets/yarn/${planet.id}.yarn'));
     final dialogueRunner = DialogueRunner(
       yarnProject: yarnProject,
       dialogueViews: [dialogueControllerComponent],
     );
-    await dialogueRunner.startDialogue('Description');
+    await dialogueRunner.startDialogue('Welcome');
   }
 }
