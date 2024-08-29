@@ -4,6 +4,7 @@ import 'package:cosmic_jump/data/planets.dart';
 import 'package:cosmic_jump/game/components/block/block_component.dart';
 import 'package:cosmic_jump/game/components/checkpoint/checkpoint_component.dart';
 import 'package:cosmic_jump/game/components/coin/coin_component.dart';
+import 'package:cosmic_jump/game/components/dialog/dialogue_controller_component.dart';
 import 'package:cosmic_jump/game/components/fog/fog_component.dart';
 import 'package:cosmic_jump/game/components/hud/back_button.dart';
 import 'package:cosmic_jump/game/components/hud/main_hud.dart';
@@ -20,6 +21,7 @@ import 'package:flame/events.dart';
 import 'package:flame/experimental.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/services.dart';
+import 'package:jenny/jenny.dart';
 import 'package:leap/leap.dart';
 
 class CosmicJump extends LeapGame
@@ -102,10 +104,10 @@ class CosmicJump extends LeapGame
   }
 
   @override
-  void onMapLoaded(LeapMap map) {
-    _spawnPlayer();
+  Future<void> onMapLoaded(LeapMap map) async {
     _spawnMap();
-    _spawnAfterDialogue();
+    await _startDialogue();
+    _spawnPlayer();
   }
 
   void completeLevel() {
@@ -132,6 +134,9 @@ class CosmicJump extends LeapGame
   void _spawnMap() {
     _spawnFog();
     _spawnLighting();
+    _spawnMeteors();
+
+    camera.moveTo(leapMap.playerSpawn);
   }
 
   void _spawnLighting() {
@@ -160,7 +165,7 @@ class CosmicJump extends LeapGame
     camera.follow(player);
   }
 
-  void _spawnAfterDialogue() {
+  void _spawnMeteors() {
     if (planet.hasMeteorShower) {
       world.add(MeteorManager());
     }
@@ -175,5 +180,19 @@ class CosmicJump extends LeapGame
       MainHud(),
       BackButton(),
     ]);
+  }
+
+  Future<void> _startDialogue() async {
+    final dialogueControllerComponent = DialogueControllerComponent();
+    camera.viewport.add(dialogueControllerComponent);
+
+    final yarnProject = YarnProject();
+    yarnProject
+        .parse(await rootBundle.loadString('assets/yarn/${planet.id}.yarn'));
+    final dialogueRunner = DialogueRunner(
+      yarnProject: yarnProject,
+      dialogueViews: [dialogueControllerComponent],
+    );
+    await dialogueRunner.startDialogue('Description');
   }
 }

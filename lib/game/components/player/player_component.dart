@@ -35,6 +35,7 @@ class PlayerComponent extends JumperCharacter
 
     // Children
     add(animationGroup);
+    health = maxHealth;
 
     solidTags.addAll([CommonTags.ground, BlockComponent.tag]);
   }
