@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:cosmic_jump/game/components/hud/character_preview_hud.dart';
+import 'package:cosmic_jump/game/components/hud/coin_count_hud.dart';
 import 'package:cosmic_jump/game/components/hud/health_hud.dart';
 import 'package:cosmic_jump/game/components/hud/jetpack_energy_hud.dart';
 import 'package:cosmic_jump/game/cosmic_jump.dart';
@@ -21,6 +22,7 @@ class MainHud extends SpriteComponent
       HealthHud(),
       JetpackEnergyHud(game.player.jetpack),
       CharacterPreviewHud(),
+      CoinCountHud(position: Vector2(4, 50)),
     ]);
     super.onLoad();
   }

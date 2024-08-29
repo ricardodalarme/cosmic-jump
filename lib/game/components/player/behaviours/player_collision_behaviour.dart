@@ -1,4 +1,3 @@
-import 'package:cosmic_jump/data/account.dart';
 import 'package:cosmic_jump/game/components/checkpoint/checkpoint_component.dart';
 import 'package:cosmic_jump/game/components/coin/coin_component.dart';
 import 'package:cosmic_jump/game/components/meteor/meteor_component.dart';
@@ -28,7 +27,7 @@ class PlayerCollisionBehavior extends PhysicalBehavior<PlayerComponent> {
           other.explode();
         case CoinComponent():
           other.collect();
-          account.coins++;
+          parent.coins++;
         case FallingPlatformComponent():
           if (collisionInfo.down) other.startFalling();
         case SpikeEntity():

@@ -49,6 +49,7 @@ class PlayerComponent extends JumperCharacter
 
   final JetpackComponent jetpack = JetpackComponent();
 
+  int coins = 0;
   bool gotHit = false;
   bool reachedCheckpoint = false;
   bool completedLevel = false;
@@ -88,5 +89,6 @@ class PlayerComponent extends JumperCharacter
     jumping = false;
     health = maxHealth;
     energy = maxEnergy;
+    coins = 0;
   }
 }
