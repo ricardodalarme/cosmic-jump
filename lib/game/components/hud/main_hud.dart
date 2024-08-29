@@ -20,7 +20,7 @@ class MainHud extends SpriteComponent
 
     addAll([
       HealthHud(),
-      JetpackEnergyHud(game.player.jetpack),
+      JetpackEnergyHud(),
       CharacterPreviewHud(),
       CoinCountHud(position: Vector2(4, 50)),
     ]);

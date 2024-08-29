@@ -1,5 +1,4 @@
 import 'package:cosmic_jump/game/components/block/block_component.dart';
-import 'package:cosmic_jump/game/components/jetpack/jetpack_component.dart';
 import 'package:cosmic_jump/game/components/player/behaviours/player_checkpoint_behaviour.dart';
 import 'package:cosmic_jump/game/components/player/behaviours/player_collision_behaviour.dart';
 import 'package:cosmic_jump/game/components/player/behaviours/player_damage_behaviour.dart';
@@ -47,8 +46,6 @@ class PlayerComponent extends JumperCharacter
 
   double timeHoldingJump = 0;
   bool didEnemyBop = false;
-
-  final JetpackComponent jetpack = JetpackComponent();
 
   int coins = 0;
   bool gotHit = false;

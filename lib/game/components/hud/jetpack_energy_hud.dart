@@ -4,9 +4,7 @@ import 'package:flame/components.dart';
 
 class JetpackEnergyHud extends SpriteComponent
     with HasGameReference<CosmicJump> {
-  JetpackEnergyHud(this.jetpack) : super(position: _position);
-
-  final JetpackComponent jetpack;
+  JetpackEnergyHud() : super(position: _position);
 
   static final Vector2 _position = Vector2(53, 14);
 
@@ -23,6 +21,7 @@ class JetpackEnergyHud extends SpriteComponent
     final spriteWidth = sprite!.srcSize.x;
 
     // reduces the size of the sprite based on the player's health
-    width = spriteWidth * (jetpack.remainingTime / JetpackComponent.duration);
+    width = spriteWidth *
+        (game.player.jetpack.remainingTime / JetpackComponent.duration);
   }
 }

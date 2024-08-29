@@ -44,7 +44,7 @@ class PlayerInputBehavior extends PhysicalBehavior<PlayerComponent>
   }
 
   void _jump(double dt) {
-    if (parent.hasUsedJetpack) return;
+    if (parent.isUsingJetpack) return;
 
     if (game.input.isPressedUp && parent.collisionInfo.down) {
       parent.jumping = true;
@@ -65,9 +65,7 @@ class PlayerInputBehavior extends PhysicalBehavior<PlayerComponent>
   }
 
   void _jetpack(double dt) {
-    parent.hasUsedJetpack = game.input.isPressedDown;
-
-    if (parent.hasUsedJetpack) {
+    if (game.input.isPressedDown) {
       parent.jetpack.use();
 
       if (parent.jetpack.status == JetpackStaus.using) {
