@@ -1,6 +1,7 @@
 import 'package:cosmic_jump/constants/screen_size.dart';
 import 'package:cosmic_jump/data/account.dart';
 import 'package:cosmic_jump/data/planets.dart';
+import 'package:cosmic_jump/data/settings.dart';
 import 'package:cosmic_jump/game/components/block/block_component.dart';
 import 'package:cosmic_jump/game/components/checkpoint/checkpoint_component.dart';
 import 'package:cosmic_jump/game/components/coin/coin_component.dart';
@@ -29,7 +30,6 @@ class CosmicJump extends LeapGame
   CosmicJump(this.planet) : super(tileSize: _tileSize, world: LeapWorld());
 
   final PlanetModel planet;
-  final PlayerComponent player = PlayerComponent();
   final FourButtonInput input = FourButtonInput(
     keyboardInput: FourButtonKeyboardInput(
       upKeys: {PhysicalKeyboardKey.space},
@@ -37,10 +37,11 @@ class CosmicJump extends LeapGame
     ),
   );
   final yarnProject = YarnProject();
+  late PlayerComponent player;
 
   static const double _tileSize = 16;
 
-  Future<void> _loadLevel() async {
+  Future<void> loadLevel() async {
     final groundTileHandlers = {
       'OneWayTopPlatform': OneWayTopPlatformHandler(),
     };
@@ -53,6 +54,8 @@ class CosmicJump extends LeapGame
       'FallingPlatform': FallingPlatformFactory(),
       'Trap': TrapFactory(),
     };
+
+    world.removeAll(world.children);
 
     return loadWorldAndMap(
       tiledMapPath: '${planet.id}.tmx',
@@ -67,6 +70,7 @@ class CosmicJump extends LeapGame
 
     // Load all images into cache
     await images.loadAllImages();
+    await _loadDialogs();
 
     // Default the camera size to the bounds of the Tiled map.
     camera = CameraComponent.withFixedResolution(
@@ -74,14 +78,12 @@ class CosmicJump extends LeapGame
       width: screenWidth,
       height: screenHeight,
     );
-
-    _addInput();
   }
 
   @override
   Future<void> onMount() async {
     super.onMount();
-    await _loadLevel();
+    await loadLevel();
 
     // Don't let the camera move outside the bounds of the map, inset
     // by half the viewport size to the edge of the camera if flush with the
@@ -96,6 +98,7 @@ class CosmicJump extends LeapGame
       ),
     );
 
+    _addInput();
     _addHud();
   }
 
@@ -106,19 +109,19 @@ class CosmicJump extends LeapGame
 
   @override
   Future<void> onMapLoaded(LeapMap map) async {
+    _createPlayer();
     _spawnMap();
     await _startDialogue();
     _spawnPlayer();
   }
 
-  void completeLevel() {
-    navigatorKey.currentState?.pop();
-
+  Future<void> completeLevel() async {
     final nextLevel = _getNextLevel();
     if (nextLevel == null) {
       return;
     }
     account.unlockedPlanets.add(nextLevel);
+    await navigatorKey.currentState?.maybePop(nextLevel);
   }
 
   String? _getNextLevel() {
@@ -161,6 +164,10 @@ class CosmicJump extends LeapGame
     }
   }
 
+  void _createPlayer() {
+    player = PlayerComponent();
+  }
+
   void _spawnPlayer() {
     world.add(player);
     camera.follow(player);
@@ -183,17 +190,24 @@ class CosmicJump extends LeapGame
     ]);
   }
 
+  Future<void> _loadDialogs() async {
+    yarnProject.parse(await rootBundle.loadString('assets/yarn/Welcome.yarn'));
+    yarnProject
+        .parse(await rootBundle.loadString('assets/yarn/${planet.id}.yarn'));
+  }
+
   Future<void> _startDialogue() async {
     final dialogueControllerComponent = DialogueControllerComponent();
     camera.viewport.add(dialogueControllerComponent);
 
-    yarnProject.parse(await rootBundle.loadString('assets/yarn/Welcome.yarn'));
-    yarnProject
-        .parse(await rootBundle.loadString('assets/yarn/${planet.id}.yarn'));
     final dialogueRunner = DialogueRunner(
       yarnProject: yarnProject,
       dialogueViews: [dialogueControllerComponent],
     );
-    await dialogueRunner.startDialogue('Welcome');
+
+    if (settings.showTutorial) {
+      await dialogueRunner.startDialogue('Welcome');
+      settings.showTutorial = false;
+    }
   }
 }

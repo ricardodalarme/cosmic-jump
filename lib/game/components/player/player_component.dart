@@ -76,6 +76,8 @@ class PlayerComponent extends JumperCharacter
     size = _hitbox;
     walkSpeed = leapMap.tileSize * 7;
     minJumpImpulse = leapWorld.gravity * 0.6;
+    health = maxHealth;
+    energy = maxEnergy;
 
     respawn();
   }

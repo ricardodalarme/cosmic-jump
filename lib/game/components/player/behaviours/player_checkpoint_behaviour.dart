@@ -15,6 +15,6 @@ class PlayerCheckpointBehavior extends PhysicalBehavior<PlayerComponent>
     await SoundController.instance.play('disappear.wav');
 
     parent.reachedCheckpoint = false;
-    game.completeLevel();
+    await game.completeLevel();
   }
 }
