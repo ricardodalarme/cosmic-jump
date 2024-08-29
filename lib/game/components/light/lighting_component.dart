@@ -11,13 +11,13 @@ class LightSource {
   });
 }
 
-class LightAndDarknessComponent extends PositionComponent {
+class LightingComponent extends PositionComponent {
   final List<LightSource> lightSources;
   final Paint _darknessPaint;
   final Paint _lightPaint;
   PositionComponent? player;
 
-  LightAndDarknessComponent({
+  LightingComponent({
     required Vector2 size,
     required this.lightSources,
     double visibility = 1,

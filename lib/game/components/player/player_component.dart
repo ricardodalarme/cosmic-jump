@@ -1,3 +1,4 @@
+import 'package:cosmic_jump/game/components/block/block_component.dart';
 import 'package:cosmic_jump/game/components/jetpack/jetpack_component.dart';
 import 'package:cosmic_jump/game/components/player/behaviours/player_checkpoint_behaviour.dart';
 import 'package:cosmic_jump/game/components/player/behaviours/player_collision_behaviour.dart';
@@ -35,7 +36,7 @@ class PlayerComponent extends JumperCharacter
     // Children
     add(animationGroup);
 
-    solidTags.addAll([CommonTags.ground, 'Block']);
+    solidTags.addAll([CommonTags.ground, BlockComponent.tag]);
   }
 
   final String character;

@@ -7,7 +7,7 @@ import 'package:cosmic_jump/game/components/coin/coin_component.dart';
 import 'package:cosmic_jump/game/components/fog/fog_component.dart';
 import 'package:cosmic_jump/game/components/hud/back_button.dart';
 import 'package:cosmic_jump/game/components/hud/main_hud.dart';
-import 'package:cosmic_jump/game/components/light/light_component.dart';
+import 'package:cosmic_jump/game/components/light/lighting_component.dart';
 import 'package:cosmic_jump/game/components/meteor/meteor_manager.dart';
 import 'package:cosmic_jump/game/components/platforms/falling_platform_component.dart';
 import 'package:cosmic_jump/game/components/platforms/moving_platform_component.dart';
@@ -28,7 +28,12 @@ class CosmicJump extends LeapGame
 
   final PlanetModel planet;
   final PlayerComponent player = PlayerComponent();
-  late final FourButtonInput input;
+  final FourButtonInput input = FourButtonInput(
+    keyboardInput: FourButtonKeyboardInput(
+      upKeys: {PhysicalKeyboardKey.space},
+      downKeys: {PhysicalKeyboardKey.keyX},
+    ),
+  );
 
   static const double _tileSize = 16;
 
@@ -125,23 +130,29 @@ class CosmicJump extends LeapGame
   }
 
   void _spawnMap() {
-    const double radius = 40;
+    _spawnFog();
+    _spawnLighting();
+  }
 
-    if (planet.fog != null) {
-      world.add(FogComponent(planet.fog!));
-    }
-
-    final lightSources = [
-      LightSource(position: Vector2(0, 0), radius: radius),
-    ];
-    final lightAndDarknessComponent = LightAndDarknessComponent(
+  void _spawnLighting() {
+    final playerLightSource = LightSource(
+      position: player.position,
+      radius: 40,
+    );
+    final lightSources = [playerLightSource];
+    final lightingComponent = LightingComponent(
       size: world.map.size,
       lightSources: lightSources,
       player: player,
-      visibility: planet.visibility,
     );
 
-    world.add(lightAndDarknessComponent);
+    world.add(lightingComponent);
+  }
+
+  void _spawnFog() {
+    if (planet.fog != null) {
+      world.add(FogComponent(planet.fog!));
+    }
   }
 
   void _spawnPlayer() {
@@ -156,12 +167,6 @@ class CosmicJump extends LeapGame
   }
 
   void _addInput() {
-    input = FourButtonInput(
-      keyboardInput: FourButtonKeyboardInput(
-        upKeys: {PhysicalKeyboardKey.space},
-        downKeys: {PhysicalKeyboardKey.keyX},
-      ),
-    );
     add(input);
   }
 

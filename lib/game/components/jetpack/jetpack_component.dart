@@ -4,8 +4,8 @@ import 'package:flame/components.dart';
 class JetpackComponent extends Component {
   static const double force = 50;
   static const double duration = 1000;
-  static const double rechargeSpeed = 300;
-  static const double consumptionSpeed = 1000;
+  static const double _rechargeSpeed = 300;
+  static const double _consumptionSpeed = 1000;
 
   JetpackStaus status = JetpackStaus.ready;
   double remainingTime = duration;
@@ -23,7 +23,7 @@ class JetpackComponent extends Component {
   }
 
   void _recharge(double dt) {
-    remainingTime += dt * rechargeSpeed;
+    remainingTime += dt * _rechargeSpeed;
     if (remainingTime >= duration) {
       status = JetpackStaus.ready;
       remainingTime = duration;
@@ -31,7 +31,7 @@ class JetpackComponent extends Component {
   }
 
   void _consume(double dt) {
-    remainingTime -= dt * consumptionSpeed;
+    remainingTime -= dt * _consumptionSpeed;
     if (remainingTime <= 0) {
       status = JetpackStaus.recharging;
       remainingTime = 0;

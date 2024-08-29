@@ -1,13 +1,17 @@
-import 'package:flame/components.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 import 'package:leap/leap.dart';
 
-class BlockComponent extends PhysicalEntity with HasGameRef {
-  BlockComponent(TiledObject tiledObject) : super(static: true) {
-    size = tiledObject.size;
-    position = tiledObject.position;
-    tags.add('Block');
+class BlockComponent extends PhysicalEntity {
+  BlockComponent(TiledObject tiledObject)
+      : super(
+          static: true,
+          size: tiledObject.size,
+          position: tiledObject.position,
+        ) {
+    tags.add(tag);
   }
+
+  static const String tag = 'Block';
 }
 
 class BlockFactory implements TiledObjectHandler {

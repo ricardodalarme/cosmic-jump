@@ -2,24 +2,25 @@ import 'package:flame/components.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 import 'package:leap/leap.dart';
 
-class CheckpointComponent extends PhysicalEntity with HasGameRef {
-  CheckpointComponent(TiledObject tiledObject) : super(static: true) {
-    size = tiledObject.size;
-    position = tiledObject.position;
-    position = Vector2(tiledObject.x, tiledObject.y);
-    priority = 2;
-  }
+class CheckpointComponent extends PhysicalEntity {
+  CheckpointComponent(TiledObject tiledObject)
+      : super(
+          position: tiledObject.position,
+          priority: 2,
+          size: tiledObject.size,
+          static: true,
+        );
 
   @override
   void onLoad() {
     super.onLoad();
 
-    final sprite =
-        game.images.fromCache('Items/Checkpoints/Checkpoint/Rocket.png');
+    final image =
+        leapGame.images.fromCache('Items/Checkpoints/Checkpoint/Rocket.png');
 
     add(
       SpriteComponent(
-        sprite: Sprite(sprite),
+        sprite: Sprite(image),
         size: size,
       ),
     );

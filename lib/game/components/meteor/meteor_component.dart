@@ -17,7 +17,6 @@ class MeteorComponent extends PhysicalEntity {
   bool isExploding = false;
 
   MeteorComponent() {
-    _setupSolidProperties();
     _initializeRandomMovement();
     size = _hitbox;
   }
@@ -44,13 +43,6 @@ class MeteorComponent extends PhysicalEntity {
     isExploding = true;
     _createExplosionParticles();
     removeFromParent();
-  }
-
-  void _setupSolidProperties() {
-    isSolidFromTop = false;
-    isSolidFromLeft = false;
-    isSolidFromRight = false;
-    isSolidFromBottom = false;
   }
 
   void _initializeRandomMovement() {

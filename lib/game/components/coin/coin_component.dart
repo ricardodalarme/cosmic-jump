@@ -4,34 +4,37 @@ import 'package:flame_tiled/flame_tiled.dart';
 import 'package:leap/leap.dart';
 
 class CoinComponent extends PhysicalEntity with HasGameRef {
-  CoinComponent(TiledObject tiledObject) : super(static: true) {
-    size = Vector2.all(18);
-    priority = 2;
+  CoinComponent(TiledObject tiledObject)
+      : super(
+          static: true,
+          size: _size,
+          position: tiledObject.position + _positionOffset,
+        );
 
-    // in Tiled we center position the Coins
-    // so, we need to offset here for top-left position.
-    position = Vector2(tiledObject.x - width / 2, tiledObject.y - height / 2);
-  }
+  static final Vector2 _size = Vector2.all(16);
+  static final Vector2 _positionOffset = Vector2(0, -6);
+  static final Vector2 _textureSize = Vector2.all(32);
+  static const double _stepTime = 0.1;
 
   @override
   void onLoad() {
     super.onLoad();
 
-    final tileset = game.images.fromCache('Items/Coin.png');
+    final image = game.images.fromCache('Items/Coin.png');
     final spriteAnimation = SpriteAnimation.fromFrameData(
-      tileset,
+      image,
       SpriteAnimationData.sequenced(
         amount: 8,
-        stepTime: 0.1,
-        textureSize: Vector2(32, 32),
+        stepTime: _stepTime,
+        textureSize: _textureSize,
       ),
     );
 
+    final animationPosition = position - center;
     add(
       SpriteAnimationComponent(
-        position: Vector2(0, -6),
         animation: spriteAnimation,
-        anchor: Anchor.topLeft,
+        position: animationPosition,
       ),
     );
   }
