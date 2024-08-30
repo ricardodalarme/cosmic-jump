@@ -6,12 +6,14 @@ class Button extends StatelessWidget {
     required this.text,
     required this.onPressed,
     this.isEnabled = true,
+    this.isDense = false,
     super.key,
   });
 
   final String text;
   final VoidCallback onPressed;
   final bool isEnabled;
+  final bool isDense;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +23,9 @@ class Button extends StatelessWidget {
     return GestureDetector(
       onTap: isEnabled ? onPressed : () => {},
       child: Container(
-        padding: const EdgeInsets.all(16),
+        padding: isDense
+            ? const EdgeInsets.symmetric(horizontal: 16, vertical: 8)
+            : const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         decoration: BoxDecoration(
           color: backgroundColor,
           borderRadius: BorderRadius.circular(16),

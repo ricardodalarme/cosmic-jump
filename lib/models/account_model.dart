@@ -2,5 +2,13 @@ import 'package:cosmic_jump/data/planets.dart';
 
 class AccountModel {
   final Set<String> unlockedPlanets = {planets.first.id};
-  int coins = 0;
+  final Set<String> unlockedCharacters = {'Virtual Guy'};
+
+  String currentCharacter = '';
+
+  int coins = 50;
+
+  AccountModel() {
+    currentCharacter = unlockedCharacters.first;
+  }
 }

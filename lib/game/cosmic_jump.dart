@@ -165,7 +165,7 @@ class CosmicJump extends LeapGame
   }
 
   void _createPlayer() {
-    player = PlayerComponent();
+    player = PlayerComponent(character: account.currentCharacter);
   }
 
   void _spawnPlayer() {

@@ -13,7 +13,7 @@ import 'package:leap/leap.dart';
 class PlayerComponent extends JumperCharacter
     with HasJetpack, HasAnimationGroup {
   PlayerComponent({
-    this.character = 'Virtual Guy',
+    required this.character,
   }) {
     // Behaviors, ordering is important for processing
     // collision detection and reacting to inputs

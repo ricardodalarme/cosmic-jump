@@ -1,6 +1,8 @@
+import 'package:cosmic_jump/app/pages/home/widgets/header_widget.dart';
 import 'package:cosmic_jump/app/pages/home/widgets/planets_widget.dart';
 import 'package:cosmic_jump/constants/colors.dart';
 import 'package:flutter/material.dart';
+
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -15,7 +17,15 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       backgroundColor: darkBlue,
-      body: SafeArea(child: PlanetsWidget()),
+      body: SafeArea(
+        child: Column(
+          children: [
+            HeaderWidget(),
+            SizedBox(height: 20),
+            Expanded(child: PlanetsWidget()),
+          ],
+        ),
+      ),
     );
   }
 }
