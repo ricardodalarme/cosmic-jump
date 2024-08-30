@@ -120,16 +120,21 @@ class CosmicJump extends LeapGame
     if (nextLevel == null) {
       return;
     }
-    account.unlockedPlanets.add(nextLevel);
+    account.unlockedPlanets.add(nextLevel.id);
+
+    final transition = LeapMapTransition.defaultFactory(this);
+    camera.viewport.add(transition);
+    await transition.introFinished;
+
     await navigatorKey.currentState?.maybePop(nextLevel);
   }
 
-  String? _getNextLevel() {
+  PlanetModel? _getNextLevel() {
     final index = planets.indexOf(planet);
 
     for (int i = index + 1; i < planets.length; i++) {
       if (planets[i].isPlayable) {
-        return planets[i].id;
+        return planets[i];
       }
     }
     return null;

@@ -1,5 +1,4 @@
 import 'package:cosmic_jump/game/audio/sound_controller.dart';
-import 'package:cosmic_jump/game/components/jetpack/jetpack_component.dart';
 import 'package:cosmic_jump/game/components/jetpack/jetpack_status.dart';
 import 'package:cosmic_jump/game/components/player/player_component.dart';
 import 'package:cosmic_jump/game/cosmic_jump.dart';
@@ -77,7 +76,7 @@ class PlayerInputBehavior extends PhysicalBehavior<PlayerComponent>
   }
 
   void _playerUseJetpack(double dt) {
-    velocity.y = -JetpackComponent.force;
+    velocity.y = -parent.jetpack.force;
     position.y += velocity.y * dt;
   }
 }

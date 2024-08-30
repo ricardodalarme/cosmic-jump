@@ -7,18 +7,15 @@ import 'package:cosmic_jump/game/components/player/behaviours/player_input_behav
 import 'package:cosmic_jump/game/components/player/mixins/has_jetpack.dart';
 import 'package:cosmic_jump/game/components/player/player_animation.dart';
 import 'package:cosmic_jump/game/components/player/player_state.dart';
+import 'package:cosmic_jump/game/cosmic_jump.dart';
 import 'package:flame/components.dart';
 import 'package:leap/leap.dart';
 
 class PlayerComponent extends JumperCharacter
-    with HasJetpack, HasAnimationGroup {
+    with HasJetpack, HasAnimationGroup, HasGameRef<CosmicJump> {
   PlayerComponent({
     required this.character,
   }) {
-    // Behaviors, ordering is important for processing
-    // collision detection and reacting to inputs
-    //
-    // Acceleration from movement should go before global collision detection
     addAll([
       JumperAccelerationBehavior(),
       GravityAccelerationBehavior(),
@@ -32,7 +29,6 @@ class PlayerComponent extends JumperCharacter
       AnimationVelocityFlipBehavior(),
     ]);
 
-    // Children
     add(animationGroup);
     health = maxHealth;
 
@@ -59,7 +55,6 @@ class PlayerComponent extends JumperCharacter
   AnchoredAnimationGroup<PlayerState, PlayerComponent> animationGroup =
       PlayerSpriteAnimation();
 
-  /// Render on top of the map tiles.
   @override
   int get priority => 1;
 
@@ -71,12 +66,31 @@ class PlayerComponent extends JumperCharacter
 
     _spawn = leapMap.playerSpawn;
     size = _hitbox;
-    walkSpeed = leapMap.tileSize * 7;
-    minJumpImpulse = leapWorld.gravity * 0.6;
     health = maxHealth;
     energy = maxEnergy;
 
+    _updateMovementBasedOnGravity();
+
     respawn();
+  }
+
+  void _updateMovementBasedOnGravity() {
+    // Get the gravity of the current planet
+    final double planetGravity = game.planet.gravity;
+
+    // Calculate a more balanced gravity factor
+    final gravityFactor = planetGravity / 9.8;
+
+    // Update walk speed based on gravity, using a gentler scaling factor
+    walkSpeed = (leapWorld.gravity * leapMap.tileSize) /
+        50 *
+        (0.3 + 0.3 * gravityFactor);
+
+    // Apply a smaller scaling factor for the jump impulse to avoid extreme jumps
+    minJumpImpulse = leapWorld.gravity * (0.3 + 0.25 * gravityFactor);
+
+    // Adjust jetpack force more conservatively to ensure it feels balanced across planets
+    jetpack.force = leapWorld.gravity * (0.4 + 0.3 * gravityFactor) / 7.5;
   }
 
   void respawn() {

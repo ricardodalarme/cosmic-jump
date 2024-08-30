@@ -8,8 +8,8 @@ class GamePage extends StatefulWidget {
 
   final PlanetModel planet;
 
-  static Route<void> route(PlanetModel planet) {
-    return PageRouteBuilder<void>(
+  static Route<PlanetModel> route(PlanetModel planet) {
+    return PageRouteBuilder<PlanetModel>(
       pageBuilder: (context, animation, secondaryAnimation) => GamePage(
         planet: planet,
       ),

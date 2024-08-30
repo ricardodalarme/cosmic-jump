@@ -5,6 +5,7 @@ import 'package:cosmic_jump/app/pages/details/view/details_page.dart';
 import 'package:cosmic_jump/app/pages/game/view/game_page.dart';
 import 'package:cosmic_jump/app/pages/home/widgets/circle_indicator.dart';
 import 'package:cosmic_jump/app/pages/home/widgets/planet_item.dart';
+import 'package:cosmic_jump/app/widgets/app_snackbar.dart';
 import 'package:cosmic_jump/app/widgets/button.dart';
 import 'package:cosmic_jump/constants/colors.dart';
 import 'package:cosmic_jump/data/account.dart';
@@ -141,7 +142,17 @@ class _PlanetsWidgetState extends State<PlanetsWidget> {
                   onPressed: () => Navigator.push(
                     context,
                     GamePage.route(planets[index]),
-                  ),
+                  ).then((unlockedPlanet) {
+                    if (unlockedPlanet != null) {
+                      setState(() {});
+                      if (mounted) {
+                        AppSnackbar(
+                          'Parabéns! Você desbloqueou o planeta ${unlockedPlanet.name}!',
+                          // ignore: use_build_context_synchronously
+                        ).show(context);
+                      }
+                    }
+                  }),
                   text: 'Jogar',
                   isEnabled: account.unlockedPlanets.contains(planet.id),
                 ),

@@ -2,11 +2,11 @@ import 'package:cosmic_jump/game/components/jetpack/jetpack_status.dart';
 import 'package:flame/components.dart';
 
 class JetpackComponent extends Component {
-  static const double force = 50;
   static const double duration = 1000;
   static const double _rechargeSpeed = 100;
-  static const double _consumptionSpeed = 550;
+  static const double _consumptionSpeed = 800;
 
+  double force = 50;
   JetpackStaus status = JetpackStaus.ready;
   double remainingTime = duration;
 

@@ -1,3 +1,4 @@
+import 'package:cosmic_jump/app/widgets/app_snackbar.dart';
 import 'package:cosmic_jump/app/widgets/button.dart';
 import 'package:cosmic_jump/constants/colors.dart';
 import 'package:cosmic_jump/data/account.dart';
@@ -225,19 +226,9 @@ class _HeaderWidgetState extends State<HeaderWidget> {
                         final price = charactersPrices[character]!;
                         if (account.coins < price) {
                           Navigator.of(context).pop();
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              backgroundColor: darkBlue,
-                              content: Text(
-                                'Moedas insuficientes',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                          );
+                          const AppSnackbar('Moedas insuficientes')
+                              .show(context);
+
                           return;
                         }
 
