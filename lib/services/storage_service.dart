@@ -14,23 +14,23 @@ class StorageService {
     );
   }
 
-  String? readString({required String key}) {
+  String? readString(String key) {
     return _sharedPreferences.getString(key);
   }
 
-  Future<void> writeString({required String key, required String value}) async {
+  Future<void> writeString(String key, {required String value}) async {
     await _sharedPreferences.setString(key, value);
   }
 
-  bool? readBool({required String key}) {
+  bool? readBool(String key) {
     return _sharedPreferences.getBool(key);
   }
 
-  Future<void> writeBool({required String key, required bool value}) async {
+  Future<void> writeBool(String key, {required bool value}) async {
     await _sharedPreferences.setBool(key, value);
   }
 
-  Future<void> delete({required String key}) async {
+  Future<void> delete(String key) async {
     await _sharedPreferences.remove(key);
   }
 

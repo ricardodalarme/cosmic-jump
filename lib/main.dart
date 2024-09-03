@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cosmic_jump/app/pages/splash/view/splash_page.dart';
 import 'package:cosmic_jump/constants/screen_size.dart';
+import 'package:cosmic_jump/services/storage_service.dart';
 import 'package:flame/flame.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,7 @@ void main() async {
   await Flame.device.fullScreen();
   await Flame.device.setPortraitUpOnly();
   await SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
+  await StorageService.instance.initialize();
 
   if (!kIsWeb && (Platform.isWindows || Platform.isLinux || Platform.isMacOS)) {
     setWindowTitle('Cosmic Jump');
