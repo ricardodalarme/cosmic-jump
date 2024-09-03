@@ -54,10 +54,9 @@ flutter:
     - assets/images/Characters/Pink Man/
     - assets/images/Characters/Virtual Guy/
     - assets/images/Fogs/
-    - assets/images/Fogs/
     - assets/images/HUD/
     - assets/images/Items/
-    - assets/images/Items/Checkpoints/Checkpoint/
+    - assets/images/Checkpoints/
     - assets/images/Planets/
     - assets/images/Planets/Pictures/
     - assets/images/Platforms/

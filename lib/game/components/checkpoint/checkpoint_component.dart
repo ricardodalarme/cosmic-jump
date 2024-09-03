@@ -16,7 +16,7 @@ class CheckpointComponent extends PhysicalEntity {
     super.onLoad();
 
     final image =
-        leapGame.images.fromCache('Items/Checkpoints/Checkpoint/Rocket.png');
+        leapGame.images.fromCache('Checkpoints/Rocket.png');
 
     add(
       SpriteComponent(
