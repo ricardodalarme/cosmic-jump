@@ -1,7 +1,7 @@
 import 'package:cosmic_jump/app/pages/details/widgets/planet_description.dart';
 import 'package:cosmic_jump/app/pages/details/widgets/planet_overview.dart';
 import 'package:cosmic_jump/constants/colors.dart';
-import 'package:cosmic_jump/models/planet_model.dart';
+import 'package:cosmic_jump/data/models/planet_model.dart';
 import 'package:flutter/material.dart';
 
 class DetailsPage extends StatelessWidget {

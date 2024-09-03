@@ -1,4 +1,4 @@
-import 'package:cosmic_jump/models/fog_model.dart';
+import 'package:cosmic_jump/data/models/fog_model.dart';
 
 class PlanetModel {
   const PlanetModel({

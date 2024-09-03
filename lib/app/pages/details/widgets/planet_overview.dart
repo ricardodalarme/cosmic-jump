@@ -1,7 +1,7 @@
 import 'package:cosmic_jump/app/pages/details/widgets/planet_distance.dart';
 import 'package:cosmic_jump/app/widgets/fade_in_animation.dart';
 import 'package:cosmic_jump/constants/colors.dart';
-import 'package:cosmic_jump/models/planet_model.dart';
+import 'package:cosmic_jump/data/models/planet_model.dart';
 import 'package:flutter/material.dart';
 
 class PlanetOverview extends StatelessWidget {

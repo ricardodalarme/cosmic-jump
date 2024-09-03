@@ -8,9 +8,9 @@ import 'package:cosmic_jump/app/pages/home/widgets/planet_item.dart';
 import 'package:cosmic_jump/app/widgets/app_snackbar.dart';
 import 'package:cosmic_jump/app/widgets/button.dart';
 import 'package:cosmic_jump/constants/colors.dart';
-import 'package:cosmic_jump/data/account.dart';
-import 'package:cosmic_jump/data/planets.dart';
-import 'package:cosmic_jump/models/planet_model.dart';
+import 'package:cosmic_jump/data/models/planet_model.dart';
+import 'package:cosmic_jump/data/resources/account.dart';
+import 'package:cosmic_jump/data/resources/planets.dart';
 import 'package:flutter/material.dart';
 
 class PlanetsWidget extends StatefulWidget {

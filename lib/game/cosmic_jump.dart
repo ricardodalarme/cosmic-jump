@@ -1,7 +1,8 @@
 import 'package:cosmic_jump/constants/screen_size.dart';
-import 'package:cosmic_jump/data/account.dart';
-import 'package:cosmic_jump/data/planets.dart';
-import 'package:cosmic_jump/data/settings.dart';
+import 'package:cosmic_jump/data/models/planet_model.dart';
+import 'package:cosmic_jump/data/resources/account.dart';
+import 'package:cosmic_jump/data/resources/planets.dart';
+import 'package:cosmic_jump/data/resources/settings.dart';
 import 'package:cosmic_jump/game/components/block/block_component.dart';
 import 'package:cosmic_jump/game/components/checkpoint/checkpoint_component.dart';
 import 'package:cosmic_jump/game/components/coin/coin_component.dart';
@@ -16,7 +17,6 @@ import 'package:cosmic_jump/game/components/platforms/moving_platform_component.
 import 'package:cosmic_jump/game/components/player/player_component.dart';
 import 'package:cosmic_jump/game/components/traps/spike_component.dart';
 import 'package:cosmic_jump/main.dart';
-import 'package:cosmic_jump/models/planet_model.dart';
 import 'package:flame/camera.dart';
 import 'package:flame/events.dart';
 import 'package:flame/experimental.dart';

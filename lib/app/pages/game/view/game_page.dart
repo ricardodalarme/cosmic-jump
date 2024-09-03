@@ -1,5 +1,5 @@
+import 'package:cosmic_jump/data/models/planet_model.dart';
 import 'package:cosmic_jump/game/cosmic_jump.dart';
-import 'package:cosmic_jump/models/planet_model.dart';
 import 'package:flame/game.dart' hide Route;
 import 'package:flutter/material.dart';
 

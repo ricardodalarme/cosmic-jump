@@ -1,8 +1,8 @@
 import 'package:cosmic_jump/app/widgets/app_snackbar.dart';
 import 'package:cosmic_jump/app/widgets/button.dart';
 import 'package:cosmic_jump/constants/colors.dart';
-import 'package:cosmic_jump/data/account.dart';
-import 'package:cosmic_jump/data/characters.dart';
+import 'package:cosmic_jump/data/resources/account.dart';
+import 'package:cosmic_jump/data/resources/characters.dart';
 import 'package:flutter/material.dart';
 
 class HeaderWidget extends StatefulWidget {

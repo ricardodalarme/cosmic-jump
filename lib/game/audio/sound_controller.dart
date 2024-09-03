@@ -1,4 +1,4 @@
-import 'package:cosmic_jump/data/settings.dart';
+import 'package:cosmic_jump/data/resources/settings.dart';
 import 'package:flame_audio/flame_audio.dart';
 
 class SoundController {

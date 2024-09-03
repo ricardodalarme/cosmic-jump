@@ -1,4 +1,4 @@
-import 'package:cosmic_jump/data/planets.dart';
+import 'package:cosmic_jump/data/resources/planets.dart';
 
 class AccountModel {
   final Set<String> unlockedPlanets = {planets.first.id};
