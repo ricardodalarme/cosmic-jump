@@ -1,11 +1,10 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-class PersistentStorageService {
-  PersistentStorageService._();
+class StorageService {
+  StorageService._();
 
-  static PersistentStorageService get instance => _instance;
-  static final PersistentStorageService _instance =
-      PersistentStorageService._();
+  static StorageService get instance => _instance;
+  static final StorageService _instance = StorageService._();
 
   late final SharedPreferencesWithCache _sharedPreferences;
 
