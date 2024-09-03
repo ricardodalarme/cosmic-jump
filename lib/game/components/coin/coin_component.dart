@@ -1,4 +1,4 @@
-import 'package:cosmic_jump/game/audio/sound_controller.dart';
+import 'package:cosmic_jump/services/sound_service.dart';
 import 'package:flame/components.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 import 'package:leap/leap.dart';
@@ -41,7 +41,7 @@ class CoinComponent extends PhysicalEntity with HasGameRef {
 
   void collect() {
     removeFromParent();
-    SoundController.instance.play('collect_item.wav');
+    SoundService.instance.play('collect_item.wav');
   }
 }
 

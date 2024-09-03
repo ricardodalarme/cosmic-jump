@@ -1,7 +1,7 @@
-import 'package:cosmic_jump/game/audio/sound_controller.dart';
 import 'package:cosmic_jump/game/components/jetpack/jetpack_status.dart';
 import 'package:cosmic_jump/game/components/player/player_component.dart';
 import 'package:cosmic_jump/game/cosmic_jump.dart';
+import 'package:cosmic_jump/services/sound_service.dart';
 import 'package:flame/components.dart';
 import 'package:leap/leap.dart';
 
@@ -47,7 +47,7 @@ class PlayerInputBehavior extends PhysicalBehavior<PlayerComponent>
 
     if (game.input.isPressedUp && parent.collisionInfo.down) {
       parent.jumping = true;
-      SoundController.instance.play('jump.wav'); // Toca som de pulo
+      SoundService.instance.play('jump.wav'); // Toca som de pulo
     }
 
     if (parent.jumping &&
