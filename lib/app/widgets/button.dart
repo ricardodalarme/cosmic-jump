@@ -1,4 +1,4 @@
-import 'package:cosmic_jump/constants/colors.dart';
+import 'package:cosmic_jump/constants/app_colors.dart';
 import 'package:flutter/widgets.dart';
 
 class Button extends StatelessWidget {
@@ -17,8 +17,8 @@ class Button extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final backgroundColor = isEnabled ? darkBlue : disabled;
-    final textColor = isEnabled ? white : disabled2;
+    final backgroundColor = isEnabled ? AppColors.darkBlue : AppColors.disabled;
+    final textColor = isEnabled ? AppColors.white : AppColors.disabled2;
 
     return GestureDetector(
       onTap: isEnabled ? onPressed : () => {},
@@ -32,7 +32,7 @@ class Button extends StatelessWidget {
           boxShadow: isEnabled
               ? const [
                   BoxShadow(
-                    color: lightBlue2,
+                    color: AppColors.lightBlue2,
                     blurRadius: 16,
                     offset: Offset(0, 4),
                   ),

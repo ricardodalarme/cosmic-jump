@@ -7,7 +7,7 @@ import 'package:cosmic_jump/app/pages/home/widgets/circle_indicator.dart';
 import 'package:cosmic_jump/app/pages/home/widgets/planet_item.dart';
 import 'package:cosmic_jump/app/widgets/app_snackbar.dart';
 import 'package:cosmic_jump/app/widgets/button.dart';
-import 'package:cosmic_jump/constants/colors.dart';
+import 'package:cosmic_jump/constants/app_colors.dart';
 import 'package:cosmic_jump/data/models/planet_model.dart';
 import 'package:cosmic_jump/data/resources/account.dart';
 import 'package:cosmic_jump/data/resources/planets.dart';
@@ -190,13 +190,13 @@ class PlanetName extends StatelessWidget {
         child: Hero(
           tag: planet.name,
           child: Material(
-            color: transparent,
+            color: AppColors.transparent,
             child: Column(
               children: [
                 Text(
                   planet.name.toUpperCase(),
                   style: const TextStyle(
-                    color: white,
+                    color: AppColors.white,
                     letterSpacing: 1.2,
                     fontSize: 42,
                     fontWeight: FontWeight.bold,
@@ -206,7 +206,7 @@ class PlanetName extends StatelessWidget {
                 Text(
                   planet.title,
                   style: const TextStyle(
-                    color: white,
+                    color: AppColors.white,
                     fontSize: 14,
                     letterSpacing: 1.2,
                     fontWeight: FontWeight.normal,
@@ -279,7 +279,7 @@ class PlanetRotation extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 620,
-      color: transparent,
+      color: AppColors.transparent,
       child: Transform.rotate(
         angle: -angle * pi / 180,
         alignment: Alignment.bottomCenter,

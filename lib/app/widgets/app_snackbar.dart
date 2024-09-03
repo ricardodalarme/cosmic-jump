@@ -1,4 +1,4 @@
-import 'package:cosmic_jump/constants/colors.dart';
+import 'package:cosmic_jump/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class AppSnackbar extends StatelessWidget {
@@ -12,7 +12,7 @@ class AppSnackbar extends StatelessWidget {
   void show(BuildContext context) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        backgroundColor: lightBlue,
+        backgroundColor: AppColors.lightBlue,
         content: this,
       ),
     );

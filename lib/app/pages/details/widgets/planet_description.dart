@@ -1,5 +1,5 @@
 import 'package:cosmic_jump/app/pages/details/widgets/description_tile.dart';
-import 'package:cosmic_jump/constants/colors.dart';
+import 'package:cosmic_jump/constants/app_colors.dart';
 import 'package:cosmic_jump/data/models/planet_model.dart';
 import 'package:flutter/widgets.dart';
 
@@ -19,7 +19,7 @@ class PlanetDescription extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 25),
       decoration: const BoxDecoration(
         gradient: LinearGradient(
-          colors: [darkBlue, lightBlue],
+          colors: [AppColors.darkBlue, AppColors.lightBlue],
           end: Alignment.topCenter,
           begin: Alignment.bottomCenter,
         ),

@@ -1,6 +1,6 @@
 import 'package:cosmic_jump/app/pages/home/widgets/header_widget.dart';
 import 'package:cosmic_jump/app/pages/home/widgets/planets_widget.dart';
-import 'package:cosmic_jump/constants/colors.dart';
+import 'package:cosmic_jump/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 
 
@@ -16,7 +16,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      backgroundColor: darkBlue,
+      backgroundColor: AppColors.darkBlue,
       body: SafeArea(
         child: Column(
           children: [

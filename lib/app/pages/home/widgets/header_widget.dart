@@ -1,6 +1,6 @@
 import 'package:cosmic_jump/app/widgets/app_snackbar.dart';
 import 'package:cosmic_jump/app/widgets/button.dart';
-import 'package:cosmic_jump/constants/colors.dart';
+import 'package:cosmic_jump/constants/app_colors.dart';
 import 'package:cosmic_jump/data/resources/account.dart';
 import 'package:cosmic_jump/data/resources/characters.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +34,7 @@ class _HeaderWidgetState extends State<HeaderWidget> {
                   padding: const EdgeInsets.only(top: 16),
                   child: DecoratedBox(
                     decoration: BoxDecoration(
-                      color: lightBlue2,
+                      color: AppColors.lightBlue2,
                       borderRadius: BorderRadius.circular(16),
                       boxShadow: [
                         BoxShadow(
@@ -124,7 +124,7 @@ class _HeaderWidgetState extends State<HeaderWidget> {
                   child: DecoratedBox(
                     // decorate as the circle avatar
                     decoration: const BoxDecoration(
-                      color: lightBlue2,
+                      color: AppColors.lightBlue2,
                       shape: BoxShape.circle,
                     ),
                     child: Padding(
@@ -174,7 +174,7 @@ class _HeaderWidgetState extends State<HeaderWidget> {
           child: Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: lightBlue2,
+              color: AppColors.lightBlue2,
               borderRadius: BorderRadius.circular(16),
               boxShadow: [
                 BoxShadow(

@@ -1,7 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:cosmic_jump/app/widgets/fade_in_animation.dart';
-import 'package:cosmic_jump/constants/colors.dart';
+import 'package:cosmic_jump/constants/app_colors.dart';
 import 'package:cosmic_jump/data/models/planet_model.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart' show Icons;
@@ -24,7 +24,7 @@ class PlanetDistance extends StatelessWidget {
           'Distância da Terra',
           style: TextStyle(
             letterSpacing: 1.2,
-            color: lightBlue,
+            color: AppColors.lightBlue,
             fontWeight: FontWeight.normal,
           ),
         ),
@@ -33,7 +33,7 @@ class PlanetDistance extends StatelessWidget {
           '${planet.distancefromEarth.toStringAsFixed(0)} km',
           style: const TextStyle(
             letterSpacing: 1.2,
-            color: lightBlue,
+            color: AppColors.lightBlue,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -57,7 +57,7 @@ class _PlanetDistanceIndicator extends StatelessWidget {
           SvgPicture.asset(
             'assets/svgs/earth.svg',
             colorFilter: const ColorFilter.mode(
-              lightBlue,
+              AppColors.lightBlue,
               BlendMode.srcIn,
             ),
           ),
@@ -68,7 +68,7 @@ class _PlanetDistanceIndicator extends StatelessWidget {
               clipBehavior: Clip.none,
               children: [
                 const DottedLine(
-                  dashColor: lightBlue,
+                  dashColor: AppColors.lightBlue,
                   dashLength: 10,
                   lineThickness: 2,
                 ),
@@ -83,7 +83,7 @@ class _PlanetDistanceIndicator extends StatelessWidget {
                     angle: 45 * math.pi / 180,
                     child: const Icon(
                       Icons.rocket_launch_rounded,
-                      color: lightBlue,
+                      color: AppColors.lightBlue,
                     ),
                   ),
                 ),

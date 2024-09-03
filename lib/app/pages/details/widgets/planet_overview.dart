@@ -1,6 +1,6 @@
 import 'package:cosmic_jump/app/pages/details/widgets/planet_distance.dart';
 import 'package:cosmic_jump/app/widgets/fade_in_animation.dart';
-import 'package:cosmic_jump/constants/colors.dart';
+import 'package:cosmic_jump/constants/app_colors.dart';
 import 'package:cosmic_jump/data/models/planet_model.dart';
 import 'package:flutter/material.dart';
 
@@ -40,7 +40,7 @@ class _PlanetHeader extends StatelessWidget {
         Text(
           planet.name.toUpperCase(),
           style: const TextStyle(
-            color: white,
+            color: AppColors.white,
             fontSize: 42,
             letterSpacing: 1.2,
             fontWeight: FontWeight.bold,
@@ -50,7 +50,7 @@ class _PlanetHeader extends StatelessWidget {
         Text(
           planet.title,
           style: const TextStyle(
-            color: white,
+            color: AppColors.white,
             fontSize: 14,
             letterSpacing: 1.2,
             fontWeight: FontWeight.normal,
@@ -114,7 +114,7 @@ class _TemperatureOverlay extends StatelessWidget {
         height: 70,
         width: 70,
         decoration: BoxDecoration(
-          color: white.withOpacity(0.2),
+          color: AppColors.white.withOpacity(0.2),
           shape: BoxShape.circle,
         ),
         child: Row(
@@ -123,13 +123,13 @@ class _TemperatureOverlay extends StatelessWidget {
           children: [
             const Icon(
               Icons.thermostat_rounded,
-              color: white,
+              color: AppColors.white,
             ),
             Text(
               temperature.toString(),
               style: const TextStyle(
                 letterSpacing: 1.2,
-                color: white,
+                color: AppColors.white,
                 fontWeight: FontWeight.bold,
               ),
             ),

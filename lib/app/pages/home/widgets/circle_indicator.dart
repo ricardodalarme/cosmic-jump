@@ -1,5 +1,5 @@
 import 'package:circle_list/circle_list.dart';
-import 'package:cosmic_jump/constants/colors.dart';
+import 'package:cosmic_jump/constants/app_colors.dart';
 import 'package:flutter/widgets.dart';
 
 class CircleIndicator extends StatelessWidget {
@@ -27,8 +27,9 @@ class CircleIndicator extends StatelessWidget {
             padding: const EdgeInsets.all(4),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color:
-                  currentIndex == index ? white.withOpacity(0.3) : transparent,
+              color: currentIndex == index
+                  ? AppColors.white.withOpacity(0.3)
+                  : AppColors.transparent,
             ),
             child: AnimatedContainer(
               width: 10,
@@ -36,7 +37,9 @@ class CircleIndicator extends StatelessWidget {
               duration: const Duration(milliseconds: 500),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: currentIndex == index ? white : white.withOpacity(0.3),
+                color: currentIndex == index
+                    ? AppColors.white
+                    : AppColors.white.withOpacity(0.3),
               ),
             ),
           ),

@@ -1,4 +1,4 @@
-import 'package:cosmic_jump/constants/colors.dart';
+import 'package:cosmic_jump/constants/app_colors.dart';
 import 'package:flutter/widgets.dart';
 
 class PlanetItem extends StatelessWidget {
@@ -16,7 +16,7 @@ class PlanetItem extends StatelessWidget {
         shape: BoxShape.circle,
         boxShadow: [
           BoxShadow(
-            color: white.withOpacity(0.2),
+            color: AppColors.white.withOpacity(0.2),
             offset: const Offset(0, -10),
             spreadRadius: 5,
             blurRadius: 10,

@@ -1,4 +1,4 @@
-import 'package:cosmic_jump/constants/colors.dart';
+import 'package:cosmic_jump/constants/app_colors.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -21,7 +21,7 @@ class DescriptionTile extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
       decoration: BoxDecoration(
-        color: lightBlue2,
+        color: AppColors.lightBlue2,
         borderRadius: BorderRadius.circular(42),
       ),
       child: Row(
@@ -31,7 +31,7 @@ class DescriptionTile extends StatelessWidget {
             width: 24,
             height: 24,
             colorFilter: const ColorFilter.mode(
-              white,
+              AppColors.white,
               BlendMode.srcIn,
             ),
           ),
@@ -42,7 +42,7 @@ class DescriptionTile extends StatelessWidget {
               Text(
                 text,
                 style: const TextStyle(
-                  color: white,
+                  color: AppColors.white,
                   letterSpacing: 1.2,
                 ),
               ),
@@ -50,7 +50,7 @@ class DescriptionTile extends StatelessWidget {
               Text(
                 '$value $unit',
                 style: const TextStyle(
-                  color: white,
+                  color: AppColors.white,
                   letterSpacing: 1.2,
                   fontWeight: FontWeight.bold,
                 ),

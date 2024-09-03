@@ -1,4 +1,4 @@
-import 'package:cosmic_jump/constants/colors.dart';
+import 'package:cosmic_jump/constants/app_colors.dart';
 import 'package:flutter/widgets.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
@@ -23,13 +23,13 @@ class AnimatedToggle extends StatelessWidget {
       labels: values,
       minWidth: 120,
       onToggle: onChanged,
-      activeFgColor: white,
-      activeBgColor: const [lightBlue2],
+      activeFgColor: AppColors.white,
+      activeBgColor: const [AppColors.lightBlue2],
       animate: true,
       animationDuration: 150,
       customTextStyles: const [
         TextStyle(
-          color: white,
+          color: AppColors.white,
           fontWeight: FontWeight.bold,
         ),
         TextStyle(

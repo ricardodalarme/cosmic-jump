@@ -1,5 +1,5 @@
 import 'package:cosmic_jump/app/pages/home/view/home_page.dart';
-import 'package:cosmic_jump/constants/colors.dart';
+import 'package:cosmic_jump/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class SplashPage extends StatefulWidget {
@@ -19,7 +19,7 @@ class _SplashPageState extends State<SplashPage> {
             child: Image.asset(
               'assets/images/splash_screen.jpg',
               fit: BoxFit.cover,
-              color: darkBlue.withOpacity(0.4),
+              color: AppColors.darkBlue.withOpacity(0.4),
               colorBlendMode: BlendMode.darken,
             ),
           ),
@@ -34,7 +34,7 @@ class _SplashPageState extends State<SplashPage> {
                   const Text(
                     'UMA AVENTURAL ESPACIAL',
                     style: TextStyle(
-                      color: white,
+                      color: AppColors.white,
                       fontSize: 14,
                       fontWeight: FontWeight.normal,
                     ),
@@ -42,7 +42,7 @@ class _SplashPageState extends State<SplashPage> {
                   RichText(
                     text: const TextSpan(
                       style: TextStyle(
-                        color: white,
+                        color: AppColors.white,
                         fontSize: 48,
                         fontWeight: FontWeight.normal,
                       ),
@@ -62,7 +62,7 @@ class _SplashPageState extends State<SplashPage> {
                     ),
                     child: const Icon(
                       Icons.arrow_forward_rounded,
-                      color: white,
+                      color: AppColors.white,
                       size: 32,
                     ),
                   ),
