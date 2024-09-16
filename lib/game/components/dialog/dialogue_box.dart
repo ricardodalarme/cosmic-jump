@@ -8,6 +8,8 @@ class DialogueBoxComponent extends SpriteComponent with HasGameReference {
   final Vector2 spriteSize = Vector2(736, 128);
   late final ButtonRow buttonRow;
 
+  DialogueBoxComponent() : super(priority: 20);
+
   @override
   Future<void> onLoad() async {
     position = Vector2(game.size.x / 2, game.size.y - 4);

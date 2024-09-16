@@ -1,23 +1,26 @@
+import 'package:cosmic_jump/constants/app_colors.dart';
 import 'package:cosmic_jump/game/components/dialog/common.dart';
 import 'package:flame/components.dart';
-import 'package:flame/input.dart';
-import 'package:flutter/material.dart';
+import 'package:flame/events.dart';
+import 'package:flutter/painting.dart';
 
-class DialogueButton extends SpriteButtonComponent {
+class DialogueButton extends SpriteComponent with HasGameRef, TapCallbacks {
   DialogueButton({
     required super.position,
     required this.assetPath,
     required this.text,
-    required super.onPressed,
+    required this.onPressed,
     super.anchor = Anchor.center,
   });
 
   final String text;
   final String assetPath;
+  final void Function() onPressed;
 
   @override
   Future<void> onLoad() async {
-    button = await Sprite.load(assetPath);
+    final image = game.images.fromCache(assetPath);
+    sprite = Sprite(image);
     add(
       TextComponent(
         text: text,
@@ -27,10 +30,15 @@ class DialogueButton extends SpriteButtonComponent {
         textRenderer: TextPaint(
           style: const TextStyle(
             fontSize: fontSize,
-            color: Colors.white70,
+            color: AppColors.white,
           ),
         ),
       ),
     );
+  }
+
+  @override
+  void onTapUp(TapUpEvent event) {
+    onPressed.call();
   }
 }
