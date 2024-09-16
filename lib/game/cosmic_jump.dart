@@ -10,6 +10,7 @@ import 'package:cosmic_jump/game/components/dialog/dialogue_controller_component
 import 'package:cosmic_jump/game/components/fog/fog_component.dart';
 import 'package:cosmic_jump/game/components/hud/back_button.dart';
 import 'package:cosmic_jump/game/components/hud/main_hud.dart';
+import 'package:cosmic_jump/game/components/input/input_component.dart';
 import 'package:cosmic_jump/game/components/light/lighting_component.dart';
 import 'package:cosmic_jump/game/components/meteor/meteor_manager.dart';
 import 'package:cosmic_jump/game/components/platforms/falling_platform_component.dart';
@@ -18,26 +19,19 @@ import 'package:cosmic_jump/game/components/player/player_component.dart';
 import 'package:cosmic_jump/game/components/traps/spike_component.dart';
 import 'package:cosmic_jump/main.dart';
 import 'package:flame/camera.dart';
-import 'package:flame/events.dart';
 import 'package:flame/experimental.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/services.dart';
 import 'package:jenny/jenny.dart';
 import 'package:leap/leap.dart';
 
-class CosmicJump extends LeapGame
-    with SingleGameInstance, TapCallbacks, HasKeyboardHandlerComponents {
+class CosmicJump extends LeapGame with SingleGameInstance {
   CosmicJump(this.planet) : super(tileSize: _tileSize, world: LeapWorld());
 
   final PlanetModel planet;
-  final FourButtonInput input = FourButtonInput(
-    keyboardInput: FourButtonKeyboardInput(
-      upKeys: {PhysicalKeyboardKey.space},
-      downKeys: {PhysicalKeyboardKey.keyX},
-    ),
-  );
   final yarnProject = YarnProject();
   late PlayerComponent player;
+  late final InputComponent input;
 
   static const double _tileSize = 16;
 
@@ -68,16 +62,16 @@ class CosmicJump extends LeapGame
   Future<void> onLoad() async {
     super.onLoad();
 
-    // Load all images into cache
-    await images.loadAllImages();
-    await _loadDialogs();
-
     // Default the camera size to the bounds of the Tiled map.
     camera = CameraComponent.withFixedResolution(
       world: world,
       width: screenWidth,
       height: screenHeight,
     );
+
+    // Load all images into cache
+    await images.loadAllImages();
+    await _loadDialogs();
   }
 
   @override
@@ -185,7 +179,8 @@ class CosmicJump extends LeapGame
   }
 
   void _addInput() {
-    add(input);
+    input = InputComponent();
+    camera.viewport.add(input);
   }
 
   void _addHud() {
