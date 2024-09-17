@@ -1,5 +1,7 @@
 import 'package:cosmic_jump/app/pages/home/view/home_page.dart';
 import 'package:cosmic_jump/constants/app_colors.dart';
+import 'package:cosmic_jump/data/repositories/settings_repository.dart';
+import 'package:cosmic_jump/data/resources/settings.dart';
 import 'package:flutter/material.dart';
 
 class SplashPage extends StatefulWidget {
@@ -56,10 +58,14 @@ class _SplashPageState extends State<SplashPage> {
                   ),
                   const SizedBox(height: 24),
                   GestureDetector(
-                    onTap: () => Navigator.pushReplacement(
-                      context,
-                      HomePage.route(),
-                    ),
+                    onTap: () {
+                      Navigator.pushReplacement(
+                        context,
+                        HomePage.route(),
+                      );
+                      settings.isFirstTime = false;
+                      SettingsRepository.instance.save(settings);
+                    },
                     child: const Icon(
                       Icons.arrow_forward_rounded,
                       color: AppColors.white,

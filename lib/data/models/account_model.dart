@@ -19,7 +19,7 @@ class AccountModel {
     return AccountModel(
       unlockedCharacters: {unlockedCharacter},
       currentCharacter: unlockedCharacter,
-      unlockedPlanets: {planets.first.id},
+      unlockedPlanets: planets.map((e) => e.id).toSet(),
       coins: 0,
     );
   }
@@ -28,8 +28,10 @@ class AccountModel {
     return AccountModel(
       currentCharacter: map['currentCharacter'] as String,
       coins: map['coins'] as int,
-      unlockedPlanets: (map['unlockedPlanets'] as List<String>).toSet(),
-      unlockedCharacters: (map['unlockedCharacters'] as List<String>).toSet(),
+      unlockedPlanets:
+          (map['unlockedPlanets'] as List).map((e) => e as String).toSet(),
+      unlockedCharacters:
+          (map['unlockedCharacters'] as List).map((e) => e as String).toSet(),
     );
   }
 

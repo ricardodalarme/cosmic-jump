@@ -1,6 +1,7 @@
 import 'package:cosmic_jump/app/widgets/app_snackbar.dart';
 import 'package:cosmic_jump/app/widgets/button.dart';
 import 'package:cosmic_jump/constants/app_colors.dart';
+import 'package:cosmic_jump/data/repositories/account_repository.dart';
 import 'package:cosmic_jump/data/resources/account.dart';
 import 'package:cosmic_jump/data/resources/characters.dart';
 import 'package:flutter/material.dart';
@@ -84,6 +85,7 @@ class _HeaderWidgetState extends State<HeaderWidget> {
                                   }
                                   setState(() {
                                     account.currentCharacter = character;
+                                    AccountRepository.instance.save(account);
                                   });
                                 },
                                 child: Stack(
@@ -235,6 +237,7 @@ class _HeaderWidgetState extends State<HeaderWidget> {
                         setState(() {
                           account.coins -= price;
                           account.unlockedCharacters.add(character);
+                          AccountRepository.instance.save(account);
                         });
                         Navigator.of(context).pop();
                       },

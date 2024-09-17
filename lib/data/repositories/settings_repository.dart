@@ -4,6 +4,11 @@ import 'package:cosmic_jump/data/models/settings_model.dart';
 import 'package:cosmic_jump/services/storage_service.dart';
 
 class SettingsRepository {
+  SettingsRepository._();
+
+  static SettingsRepository get instance => _instance;
+  static final SettingsRepository _instance = SettingsRepository._();
+
   static const String _storageKey = 'settings';
 
   SettingsModel get() {

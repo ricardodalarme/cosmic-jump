@@ -4,6 +4,11 @@ import 'package:cosmic_jump/data/models/account_model.dart';
 import 'package:cosmic_jump/services/storage_service.dart';
 
 class AccountRepository {
+  AccountRepository._();
+
+  static AccountRepository get instance => _instance;
+  static final AccountRepository _instance = AccountRepository._();
+
   static const String _storageKey = 'account';
 
   AccountModel get() {

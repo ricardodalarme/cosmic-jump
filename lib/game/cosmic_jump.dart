@@ -1,5 +1,7 @@
 import 'package:cosmic_jump/constants/screen_size.dart';
 import 'package:cosmic_jump/data/models/planet_model.dart';
+import 'package:cosmic_jump/data/repositories/account_repository.dart';
+import 'package:cosmic_jump/data/repositories/settings_repository.dart';
 import 'package:cosmic_jump/data/resources/account.dart';
 import 'package:cosmic_jump/data/resources/planets.dart';
 import 'package:cosmic_jump/data/resources/settings.dart';
@@ -115,6 +117,7 @@ class CosmicJump extends LeapGame with SingleGameInstance {
       return;
     }
     account.unlockedPlanets.add(nextLevel.id);
+    await AccountRepository.instance.save(account);
 
     final transition = LeapMapTransition.defaultFactory(this);
     camera.viewport.add(transition);
@@ -208,6 +211,7 @@ class CosmicJump extends LeapGame with SingleGameInstance {
     if (settings.showTutorial) {
       await dialogueRunner.startDialogue('Welcome');
       settings.showTutorial = false;
+      await SettingsRepository.instance.save(settings);
     }
   }
 }
