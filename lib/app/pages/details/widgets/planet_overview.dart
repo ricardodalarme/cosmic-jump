@@ -15,10 +15,11 @@ class PlanetOverview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         _PlanetHeader(planet: planet),
         const SizedBox(height: 24),
-        _PlanetImage(planet: planet),
+        Expanded(child: _PlanetImage(planet: planet)),
         const SizedBox(height: 24),
         PlanetDistance(planet: planet),
       ],
@@ -70,24 +71,17 @@ class _PlanetImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.sizeOf(context);
-
-    return SizedBox(
-      width: double.infinity,
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          Hero(
-            tag: planet.id,
-            child: Image.asset(
-              'assets/images/Planets/Pictures/${planet.id}.png',
-              width: size.width / 2,
-              height: size.width / 2,
-            ),
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        Hero(
+          tag: planet.id,
+          child: Image.asset(
+            'assets/images/Planets/Pictures/${planet.id}.png',
           ),
-          _TemperatureOverlay(temperature: planet.temperature),
-        ],
-      ),
+        ),
+        _TemperatureOverlay(temperature: planet.temperature),
+      ],
     );
   }
 }

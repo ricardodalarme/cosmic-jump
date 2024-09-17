@@ -29,7 +29,7 @@ class DetailsPage extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            PlanetOverview(planet: planet),
+            Expanded(child: PlanetOverview(planet: planet)),
             const SizedBox(height: 24),
             PlanetDescription(planet: planet, size: size),
           ],
