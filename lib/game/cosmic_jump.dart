@@ -118,6 +118,9 @@ class CosmicJump extends LeapGame with SingleGameInstance {
       await AccountRepository.instance.save(account);
     }
 
+    account.coins += player.coins;
+    await AccountRepository.instance.save(account);
+
     final transition = LeapMapTransition.defaultFactory(this);
     camera.viewport.add(transition);
     await transition.introFinished;
