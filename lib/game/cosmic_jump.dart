@@ -196,9 +196,13 @@ class CosmicJump extends LeapGame with SingleGameInstance {
   }
 
   Future<void> _loadDialogs() async {
-    yarnProject.parse(await rootBundle.loadString('assets/yarn/Welcome.yarn'));
-    yarnProject
-        .parse(await rootBundle.loadString('assets/yarn/${planet.id}.yarn'));
+    await _loadDialog('Welcome');
+    await _loadDialog(planet.id);
+  }
+
+  Future<void> _loadDialog(String name) async {
+    final asset = await rootBundle.loadString('assets/yarn/$name.yarn');
+    yarnProject.parse(asset);
   }
 
   Future<void> _startDialogue() async {
@@ -215,5 +219,7 @@ class CosmicJump extends LeapGame with SingleGameInstance {
       settings.showTutorial = false;
       await SettingsRepository.instance.save(settings);
     }
+
+    await dialogueRunner.startDialogue(planet.id);
   }
 }
