@@ -113,11 +113,10 @@ class CosmicJump extends LeapGame with SingleGameInstance {
 
   Future<void> completeLevel() async {
     final nextLevel = _getNextLevel();
-    if (nextLevel == null) {
-      return;
+    if (nextLevel != null) {
+      account.unlockedPlanets.add(nextLevel.id);
+      await AccountRepository.instance.save(account);
     }
-    account.unlockedPlanets.add(nextLevel.id);
-    await AccountRepository.instance.save(account);
 
     final transition = LeapMapTransition.defaultFactory(this);
     camera.viewport.add(transition);
