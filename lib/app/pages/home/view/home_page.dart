@@ -3,7 +3,6 @@ import 'package:cosmic_jump/app/pages/home/widgets/planets_widget.dart';
 import 'package:cosmic_jump/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 
-
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 

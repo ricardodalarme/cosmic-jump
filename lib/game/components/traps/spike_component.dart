@@ -14,8 +14,7 @@ class SpikeEntity extends PhysicalEntity with HasGameRef {
   void onLoad() {
     super.onLoad();
 
-    final sprite =
-        game.images.fromCache('Traps/Spikes/Idle.png');
+    final sprite = game.images.fromCache('Traps/Spikes/Idle.png');
 
     add(
       SpriteComponent(
