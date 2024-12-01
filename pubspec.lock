@@ -292,10 +292,10 @@ packages:
     dependency: "direct main"
     description:
       name: leap
-      sha256: f8faf3b91545f36af27d4ac2733d1d7afb48206c5abb7596a99325580c8f6624
+      sha256: "09e7d98c5fa55c07a7d931e33cd670aff96062f1afe5205bfe33a628448b5bd0"
       url: "https://pub.dev"
     source: hosted
-    version: "0.8.2"
+    version: "0.8.4"
   matcher:
     dependency: transitive
     description:
