@@ -8,7 +8,7 @@ environment:
 dependencies:
   circle_list: ^1.0.5
   dotted_line: ^3.2.3
-  flame: ^1.21.0
+  flame: ^1.24.0
   flame_audio: ^2.10.5
   flame_tiled: ^1.21.0
   flutter:
